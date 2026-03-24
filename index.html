@@ -1,11 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto integrador | Minha Página</title>
+    <title>OpiniAki | Página Inicial</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header class="topbar">
+        <div class="brand">Opini<span>Aki</span></div>
+        <div class="search">
+            <input type="text" placeholder="Buscar...">
+            <button aria-label="Buscar"></button>
+        </div>
+        <nav class="menu">
+            <a href="#home" class="is-muted">Home</a>
+            <a href="#avaliacoes" class="is-active">Avaliações</a>
+            <a href="#cadastro">Cadastre-se</a>
+        </nav>
+        <button class="burger" aria-label="Menu"></button>
+    </header>
+
+    <main>
+
+
+        <!-- mudar os horarios e informacoes de contato Endereço -->
+        <section id="home" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-info">
+                <div class="info-col">
+                    <h3>Contato</h3>
+                    <p><span class="material-symbols-outlined">location_on</span> Endereço: Cacoal Shopping</p>
+                    <p><span class="material-symbols-outlined">call</span> Whatsapp: (69) 993911387</p>
+                    <p><span class="material-symbols-outlined">mail</span> Email: saborcacoal@gmail.com</p>
+                    <p><span class="material-symbols-outlined">photo_camera</span> @SABOOOORCacoalshopping</p>
+                </div>
+                <div class="divider"></div>
+                <div class="info-col">
+                    <h3>Funcionamento</h3>
+                    <p>Terça à sexta:</p>
+                    <p><span class="material-symbols-outlined">schedule</span> Almoço: 12:00 - 15:00</p>
+                    <p><span class="material-symbols-outlined">schedule</span> Jantar: 19:00 - 23:00</p>
+                    <p>Sábados, domingos e feriados:</p>
+                    <p><span class="material-symbols-outlined">schedule</span> Almoço: 12:00 - 16:00</p>
+                    <p><span class="material-symbols-outlined">schedule</span> Jantar: 19:00 - 23:00</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="avaliacoes" class="place">
+            <h2>Nosso Estabelecimento</h2>
+            <div class="cards">
+                <article class="card" style="--img:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80')"></article>
+                <article class="card" style="--img:url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=900&q=80')"></article>
+                <article class="card" style="--img:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80')"></article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
