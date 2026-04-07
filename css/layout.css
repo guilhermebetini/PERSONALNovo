@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg: #030303;
     --bg-soft: #0b0b0b;
     --surface: rgba(13, 13, 13, 0.82);
@@ -31,7 +31,7 @@ body {
         radial-gradient(circle at top right, rgba(129, 65, 26, 0.12), transparent 24%),
         var(--bg);
     color: var(--text);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'arial', arial;
 }
 
 main {
@@ -241,6 +241,61 @@ input {
 /* .burger::after: linha inferior do icone hamburguer. */
 .burger::after {
     bottom: 13px;
+}
+
+/* .burger.is-open: animacao do burger quando o menu esta aberto. */
+.burger.is-open::before {
+    top: 50%;
+    box-shadow: none;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.burger.is-open::after {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+/* .menu: menu mobile que aparece ao clicar no burger. */
+@media (max-width: 768px) {
+    .menu {
+        position: fixed;
+        top: 70px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 0;
+        background: rgba(20, 20, 20, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 14px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 300ms ease, opacity 300ms ease;
+        z-index: 20;
+    }
+
+    .menu.is-open {
+        max-height: 300px;
+        opacity: 1;
+    }
+
+    .menu a {
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        transition: background 200ms ease;
+    }
+
+    .menu a:hover {
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .menu a:last-child {
+        border-bottom: none;
+    }
 }
 
 
@@ -621,7 +676,7 @@ input {
 }
 
 .card-copy span {
-    color: rgba(245, 243, 239, 0.74);
+    color: rgba(8, 6, 0, 0.74);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -666,7 +721,7 @@ input {
 }
 
 .review-card p {
-    color: rgba(245, 243, 239, 0.82);
+    color: rgba(0, 0, 0, 0.82);
     font-size: 16px;
     line-height: 1.75;
 }
@@ -681,7 +736,7 @@ input {
 .review-card span {
     display: block;
     margin-top: 6px;
-    color: rgba(245, 243, 239, 0.6);
+    color: rgba(2, 1, 0, 0.6);
     font-size: 14px;
 }
 
@@ -868,6 +923,151 @@ input {
     }
 }
 
+body.login-page {
+    background: #000000;
+}
+
+.login-page-main {
+    padding: 110px 24px 40px;
+}
+
+.login-screen {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.login-panel {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    background: #fff;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 32px 100px rgba(180, 4, 4, 0.12);
+}
+/* mudar o bem vindo  de volta */
+.login-side {
+    background: #df0602;
+    color: #201d2b;
+    padding: 56px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-side h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(36px, 4vw, 52px);
+    margin-bottom: 18px;
+    line-height: 1.05;
+}
+
+.login-side p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: rgba(235, 227, 227, 0.92);
+    max-width: 320px;
+}
+
+.login-panel-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 32px;
+    padding: 16px 34px;
+    border-radius: 18px;
+    background: #fff;
+    color: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.login-form-shell {
+    background: #df0602;
+    padding: 56px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-shell h2 {
+    font-size: clamp(32px, 3vw, 44px);
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+}
+
+.login-form {
+    display: grid;
+    gap: 18px;
+}
+
+.login-field {
+    position: relative;
+}
+
+.login-field i {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #333;
+}
+
+.login-field input {
+    width: 100%;
+    padding: 18px 18px 18px 56px;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #d6c7c7;
+    font-size: 16px;
+    color: #111;
+}
+
+.login-field input::placeholder {
+    color: rgba(17, 17, 17, 0.4);
+}
+
+.login-form .button-primary {
+    width: 100%;
+    background: #ff221f;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 20px 40px rgba(255, 34, 31, 0.2);
+}
+
+.login-note {
+    margin-top: 24px;
+    font-size: 15px;
+    color: rgba(17, 17, 17, 0.72);
+    text-align: center;
+}
+/* criar conta */
+.login-note a {
+    color: #0c6ef2;
+    text-decoration: none;
+    font-weight: 700;
+
+}
+
+@media (max-width: 900px) {
+    .login-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .login-form-shell,
+    .login-side {
+        padding: 40px 28px;
+    }
+
+    .login-page-main {
+        padding: 80px 18px 30px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -880,3 +1080,95 @@ input {
         transition: none !important;
     }
 }
+
+.contact-only {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 72px 24px 96px;
+    display: grid;
+    gap: 32px;
+}
+
+.contact-card {
+    background: rgba(122, 122, 122, 0.96);
+    border-radius: 34px;
+    padding: 44px 42px 38px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.18);
+    color: #121212;
+    display: grid;
+    gap: 18px;
+}
+
+.contact-card .section-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #111;
+    color: #f5f2f2;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.contact-card h1 {
+    margin: 0;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.contact-card p {
+    margin: 0;
+    color: rgba(18, 18, 18, 0.76);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1rem;
+}
+
+.contact-card p span.material-symbols-outlined {
+    font-size: 22px;
+    color: #fc0808;
+}
+
+.contact-card .whatsapp-button {
+    margin-top: 24px;
+    width: fit-content;
+    padding: 16px 32px;
+    border-radius: 999px;
+    background: #25d366;
+    border-color: #25d366;
+    color: #111;
+    font-weight: 700;
+    box-shadow: 0 18px 45px rgba(37, 211, 102, 0.2);
+}
+
+.contact-card .whatsapp-button:hover,
+.contact-card .whatsapp-button:focus-visible {
+    filter: saturate(1.15);
+    transform: translateY(-1px);
+}
+
+.map-container {
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 880px) {
+    .contact-only {
+        padding: 42px 20px 56px;
+    }
+
+    .contact-card {
+        padding: 32px 28px 28px;
+    }
+
+    .contact-card h1 {
+        font-size: 2.6rem;
+    }
+}
+
