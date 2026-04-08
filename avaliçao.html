@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpiniAki - Avaliação</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="avaliçao.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="topbar">
+        <a href="index.guilherme.html" class="brand"><span>Opini</span>Aki</a>
+
+        <div class="search">
+            <button type="button" aria-label="Buscar"></button>
+            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
+        </div>
+
+        <nav class="menu">
+            <a href="index.guilherme.html">Home</a>
+            <a href="index.guilherme.html">Ambiente</a>
+            <a href="avaliçao.html" class="is-active">Avaliação</a>
+            <a href="login.html">Login</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+
+        <a href="login.html" class="topbar-cta">Cadastre-se</a>
+        <button class="burger" type="button" aria-label="Abrir menu"></button>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-shell">
+                <div class="hero-copy">
+                    <span class="section-tag">Avaliação</span>
+                    <h1>Avalie nossos serviços com sinceridade.</h1>
+                    <p class="hero-text">Conte como foi sua experiência no restaurante: pratos, atendimento e ambiente. Sua opinião nos ajuda a melhorar cada dia mais.</p>
+                    <div class="hero-actions">
+                        <a href="#avaliacao-form" class="button-primary">Avaliar agora</a>
+                        <a href="#services" class="button-secondary">Ver serviços</a>
+                    </div>
+                </div>
+
+                <div class="hero-info">
+                    <div class="hero-info-head">
+                        <span class="hero-chip">OpiniAki</span>
+                        <p>Mais de <strong>1.250 avaliações</strong> coletadas com experiência real.</p>
+                    </div>
+
+                    <div class="hero-info-grid">
+                        <div class="info-col">
+                            <h3>Pratos</h3>
+                            <p>Delícias preparadas com ingredientes especiais e apresentação caprichada.</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="info-col">
+                            <h3>Atendimento</h3>
+                            <p>Equipe dedicada e pronta para oferecer um serviço acolhedor e eficiente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="place">
+            <div class="section-head">
+                <span class="section-tag">Nossos Serviços</span>
+                <h2>O que você pode avaliar</h2>
+                <p>Veja as áreas disponíveis e selecione os pontos que fizeram sua experiência especial.</p>
+            </div>
+
+            <div class="cards">
+                <article class="card card-a">
+                    <div class="card-copy">
+                        <strong>Pratos</strong>
+                        <span>Hot roll, Yakissoba, Harumaki, Temaki e outras especialidades.</span>
+                    </div>
+                </article>
+                <article class="card card-b">
+                    <div class="card-copy">
+                        <strong>Atendimento</strong>
+                        <span>Experiência cordial, rápida e sempre muito atenciosa.</span>
+                    </div>
+                </article>
+                <article class="card card-c">
+                    <div class="card-copy">
+                        <strong>Ambiente</strong>
+                        <span>Espaço acolhedor, música agradável e decoração inspiradora.</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="reviews" id="avaliacao-form">
+            <div class="section-head">
+                <span class="section-tag">Deixe sua nota</span>
+                <h2>Compartilhe sua experiência</h2>
+                <p>Nosso restaurante cresce com cada avaliação. Conte o que você mais gostou e o que podemos melhorar.</p>
+            </div>
+
+            <div class="review-grid">
+                <article class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p>Pratos muito saborosos, atendimento ágil e ambiente agradável. Voltarei com certeza!</p>
+                    <strong>Laura M.</strong>
+                    <span>Cliente satisfeita</span>
+                </article>
+                <article class="review-card">
+                    <div class="review-stars">★★★★☆</div>
+                    <p>Gostei do atendimento e do cardápio. Só senti falta de mais opções vegetarianas.</p>
+                    <strong>Gabriel S.</strong>
+                    <span>Avaliador</span>
+                </article>
+            </div>
+
+            <div class="hero-info-grid review-form-shell">
+                <div class="info-col">
+                    <h3>Formulário de avaliação</h3>
+                    <form action="#" method="post" class="review-form">
+                        <label for="nome">Seu nome</label>
+                        <input type="text" id="nome" name="nome" required>
+
+                        <label>Nota</label>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                        </div>
+
+                        <label for="comentario">Comentário</label>
+                        <textarea id="comentario" name="comentario" rows="5" placeholder="Escreva sua avaliação..."></textarea>
+
+                        <button type="submit" class="button-primary">Enviar avaliação</button>
+                    </form>
+                </div>
+
+                <div class="info-col">
+                    <h3>Por que avaliar?</h3>
+                    <p>As suas notas ajudam a melhorar o sabor, a experiência de atendimento e o ambiente do restaurante.</p>
+                    <div class="hero-metrics">
+                        <article><strong>4.8</strong><span>Avaliação média</span></article>
+                        <article><strong>12k</strong><span>visitas recentes</span></article>
+                        <article><strong>98%</strong><span>recomendações</span></article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 OpiniAki. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
