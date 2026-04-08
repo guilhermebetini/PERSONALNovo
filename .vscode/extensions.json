@@ -1,8 +1,19 @@
 {
     "recommendations": [
-        "esbenp.prettier-vscode",
+        "firsttris.vscode-jest-runner",
+        "kamikillerto.vscode-colorize",
+        "ms-edgedevtools.vscode-edge-devtools",
+        "codeium.codeium",
         "rvest.vs-code-prettier-eslint",
-        "tabnine.tabnine-vscode",
-        "blackboxapp.blackbox"
+        "esbenp.prettier-vscode",
+        "ms-ceintl.vscode-language-pack-pt-br",
+        "christian-kohler.path-intellisense",
+        "pkief.material-icon-theme",
+        "idleberg.icon-fonts",
+        "ritwickdey.liveserver",
+        "eamodio.gitlens",
+        "github.copilot-chat",
+        "openai.chatgpt",
+        "formulahendry.auto-close-tag"
     ]
 }
