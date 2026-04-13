@@ -70,7 +70,7 @@ textarea {
 .brand {
     display: inline-flex;
     align-items: baseline;
-    color: var(--accent);
+    color: #f1f1f1;
     font-family: 'Playfair Display', serif;
     font-size: 32px;
     font-weight: 700;
@@ -79,7 +79,7 @@ textarea {
 }
 
 .brand span {
-    color: #f6f4f2;
+    color: #fc1505;
 }
 
 .search {
@@ -90,7 +90,7 @@ textarea {
 .search input {
     width: 100%;
     height: 44px;
-    padding: 0 18px 0 50px;
+    padding: 0 18px 0 60px;
     border: none;
     border-radius: 999px;
     background: #f0efef;
@@ -107,31 +107,38 @@ textarea {
 
 .search button {
     position: absolute;
-    left: 15px;
+    left: 20px;
     top: 50%;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
     border: none;
+    border-radius: 0;
     background: transparent;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
     transform: translateY(-50%);
     cursor: pointer;
+    z-index: 1;
 }
 
 .search button::before {
     content: '';
     position: absolute;
-    inset: 0 4px 4px 0;
-    border: 3px solid #6d6d6d;
+    inset: 0 3px 3px 0;
+    border: 2px solid #6d6d6d;
     border-radius: 50%;
 }
 
 .search button::after {
     content: '';
     position: absolute;
-    right: 0;
-    bottom: 1px;
-    width: 10px;
-    height: 4px;
+    right: -1px;
+    bottom: 0;
+    width: 8px;
+    height: 2px;
     background: #6d6d6d;
     border-radius: 999px;
     transform: rotate(45deg);
@@ -239,21 +246,47 @@ main {
     position: relative;
     min-height: 100vh;
     width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     padding: 140px 0 80px;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url(imgs/imagem3.jpg);
+    background-image: url("imgs/Mesa elegante e acolhedora.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
-    transform: scale(1.03);
-    animation: heroZoom 18s ease-in-out infinite alternate;
+    background-color: #090706;
+    animation: heroFloat 18s ease-in-out infinite alternate;
+}
+
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: -5%;
+    background-image: url("imgs/Mesa elegante e acolhedora.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    filter: blur(34px);
+    transform: scale(1.08);
+    opacity: 0.28;
+    z-index: -2;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.28) 42%, rgba(0, 0, 0, 0.72) 100%),
+        linear-gradient(90deg, rgba(3, 9, 28, 0.52) 0%, rgba(3, 9, 28, 0.12) 28%, rgba(36, 12, 4, 0.16) 72%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 .hero-shell {
@@ -266,12 +299,12 @@ main {
     padding: 0 24px;
 }
 
-@keyframes heroZoom {
+@keyframes heroFloat {
     from {
-        transform: scale(1.03);
+        transform: scale(1);
     }
     to {
-        transform: scale(1.09);
+        transform: scale(1.03);
     }
 }
 
@@ -287,7 +320,7 @@ main {
     padding: 16px 18px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
-    color: #fff2ec;
+    color: #f7f7f7;
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
@@ -304,7 +337,7 @@ main {
 
 .hero-text {
     max-width: 560px;
-    color: rgba(245, 243, 239, 0.86);
+    color: rgba(255, 255, 255, 0.86);
     font-size: 18px;
     line-height: 1.8;
 }
@@ -397,6 +430,11 @@ main {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     font-weight: 700;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
 }
 
 .info-col p {
@@ -599,7 +637,7 @@ textarea {
     transform: scale(1.2);
 }
 
-button {
+.review-form button {
     padding: 16px 28px;
     background: linear-gradient(135deg, #ff4a3a, #d52417);
     color: white;
@@ -612,7 +650,7 @@ button {
     align-self: flex-start;
 }
 
-button:hover {
+.review-form button:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(255, 74, 58, 0.28);
 }

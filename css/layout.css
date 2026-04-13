@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-﻿:root {
-=======
 @font-face {
     font-family: 'Lovelo';
     src:
@@ -13,7 +10,6 @@
 }
 
 :root {
->>>>>>> 3a18eb88cf4db720b05372f10a7200fd3653721b
     --bg: #030303;
     --bg-soft: #0b0b0b;
     --surface: rgba(13, 13, 13, 0.82);
@@ -116,7 +112,7 @@ input {
 .search input {
     width: 100%;
     height: 44px;
-    padding: 0 18px 0 50px;
+    padding: 0 18px 0 60px;
     border: none;
     border-radius: 999px;
     background: #f0efef;
@@ -135,22 +131,23 @@ input {
 /* .search button: botao da busca posicionado sobre o input. */
 .search button {
     position: absolute;
-    left: 15px;
+    left: 20px;
     top: 50%;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     border: none;
     background: transparent;
     transform: translateY(-50%);
     cursor: pointer;
+    z-index: 1;
 }
 
 /* .search button::before: circulo da lupa desenhado com CSS. */
 .search button::before {
     content: '';
     position: absolute;
-    inset: 0 4px 4px 0;
-    border: 3px solid #6d6d6d;
+    inset: 0 3px 3px 0;
+    border: 2px solid #6d6d6d;
     border-radius: 50%;
 }
 
@@ -158,10 +155,10 @@ input {
 .search button::after {
     content: '';
     position: absolute;
-    right: 0;
-    bottom: 1px;
-    width: 10px;
-    height: 4px;
+    right: -1px;
+    bottom: 0;
+    width: 8px;
+    height: 2px;
     background: #6d6d6d;
     border-radius: 999px;
     transform: rotate(45deg);
@@ -562,6 +559,7 @@ input {
 /* .material-symbols-outlined: padroniza o tamanho e a aparencia dos icones do Google Material Symbols. */
 .material-symbols-outlined {
     flex: 0 0 auto;
+    font-family: 'Material Symbols Outlined', sans-serif;
     font-size: 20px;
     line-height: 1;
     color: #393332;
