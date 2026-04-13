@@ -27,7 +27,7 @@ html {
 body {
     min-height: 100vh;
     background:
-        radial-gradient(circle at top left, rgba(17, 70, 216, 0.18), transparent 28%),
+        radial-gradient(circle at top left, rgba(17, 70, 216, 0.18), transparent 28%),  
         radial-gradient(circle at top right, rgba(129, 65, 26, 0.12), transparent 24%),
         var(--bg);
     color: var(--text);
@@ -46,6 +46,7 @@ textarea {
 }
 
 /* .topbar: barra fixa do topo com logo, busca, menu e botoes de acao. */
+/* area mais importante do site */
 .topbar {
     position: fixed;
     top: 18px;
@@ -246,47 +247,21 @@ main {
     position: relative;
     min-height: 100vh;
     width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     padding: 140px 0 80px;
     overflow: hidden;
-    isolation: isolate;
 }
 
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url("imgs/Mesa elegante e acolhedora.png");
+    background-image: url(imgs/Mesa\ elegante\ e\ acolhedora.png);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
-    background-color: #090706;
-    animation: heroFloat 18s ease-in-out infinite alternate;
-}
-
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    inset: -5%;
-    background-image: url("imgs/Mesa elegante e acolhedora.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    filter: blur(34px);
-    transform: scale(1.08);
-    opacity: 0.28;
-    z-index: -2;
-}
-
-.hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.28) 42%, rgba(0, 0, 0, 0.72) 100%),
-        linear-gradient(90deg, rgba(3, 9, 28, 0.52) 0%, rgba(3, 9, 28, 0.12) 28%, rgba(36, 12, 4, 0.16) 72%, rgba(0, 0, 0, 0.48) 100%);
+    transform: scale(1.03);
+    animation: heroZoom 18s ease-in-out infinite alternate;
 }
 
 .hero-shell {
@@ -299,12 +274,12 @@ main {
     padding: 0 24px;
 }
 
-@keyframes heroFloat {
+@keyframes heroZoom {
     from {
-        transform: scale(1);
+        transform: scale(1.03);
     }
     to {
-        transform: scale(1.03);
+        transform: scale(1.09);
     }
 }
 

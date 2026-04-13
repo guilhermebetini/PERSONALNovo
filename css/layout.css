@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Lovelo';
     src:
         local('Lovelo'),
@@ -38,12 +38,30 @@ html {
 
 body {
     min-height: 100vh;
-    background:
+    position: relative;
+    isolation: isolate;
+    background-color: var(--bg);
+    background-image:
         radial-gradient(circle at top left, rgba(17, 70, 216, 0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(129, 65, 26, 0.12), transparent 24%),
-        var(--bg);
+        radial-gradient(circle at top right, rgba(129, 65, 26, 0.12), transparent 50%),
+        linear-gradient(180deg, rgba(9, 7, 6, 0.08) 0%, rgba(9, 7, 6, 0.18) 100%);
+    background-position: top left, top right, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: auto, auto, auto;
     color: var(--text);
     font-family: 'arial', arial;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url('../imgs/9k.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 main {
@@ -323,22 +341,14 @@ input {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('../imgs/imagemtelainicial.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center 38%;
-    transform: scale(1.03);
-    animation: heroZoom 18s ease-in-out infinite alternate;
+    background: none;
+    transform: none;
+    animation: none;
 }
 
 /* .hero-bg::after: sobreposicao escura para melhorar a leitura no hero. */
 .hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(180deg, rgba(3, 3, 3, 0.24) 0%, rgba(3, 3, 3, 0.35) 42%, rgba(3, 3, 3, 0.92) 100%),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 42%, rgba(35, 0, 0, 0.26) 100%);
+    content: none;
 }
 
 /* .hero-shell: grade que organiza o texto e o card lateral do hero. */
@@ -936,7 +946,7 @@ input {
 }
 
 body.login-page {
-    background: #000000;
+    background-color: var(--bg);
 }
 
 .login-page-main {
@@ -1027,9 +1037,12 @@ body.login-page {
     transform: translateY(-50%);
     font-size: 24px;
     color: #333;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .login-field input {
+    display: block;
     width: 100%;
     padding: 18px 18px 18px 56px;
     border-radius: 18px;
@@ -1188,4 +1201,12 @@ body.login-page {
         font-size: 2.6rem;
     }
 }
-
+.pp-icon-btn{
+    transition: 0.2;
+    cursor: pointer;
+    color: var(--pp-text-muted);
+    font-size: 1.2rem;
+}
+.pp-icon-btn:hover {
+    color: var(--pp-primary);
+}
