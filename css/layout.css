@@ -49,7 +49,7 @@ body {
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-size: auto, auto, auto;
     color: var(--text);
-    font-family: 'arial', arial;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
 
 body::before {
@@ -108,7 +108,7 @@ input {
     display: inline-flex;
     align-items: baseline;
     color: var(--accent);
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: 32px;
     font-weight: 700;
     line-height: 1;
@@ -361,7 +361,7 @@ input {
     grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
     gap: 34px;
     align-items: end;
-    font-family: 'Lovelo', 'Montserrat', sans-serif;
+    font-family: 'Montserrat', Arial, sans-serif;
 }     
 /* .hero-copy: coluna de textos principais e botoes do hero. */
 .hero-copy {
@@ -390,7 +390,7 @@ input {
 
 .hero-copy h1 {
     margin-top: 18px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: clamp(48px, 6vw, 76px);
     line-height: 0.95;
     letter-spacing: -0.05em;
@@ -538,7 +538,7 @@ input {
 .info-col h3 {
     margin-bottom: 12px;
     color: #fff1ea;
-    font-family: 'Lovelo', 'Playfair Display', serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: 28px;
     font-weight: 700;
 }
@@ -602,7 +602,7 @@ input {
 
 .section-head h2,
 .cta-copy h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: clamp(40px, 4vw, 58px);
     line-height: 0.98;
     letter-spacing: -0.04em;
@@ -979,7 +979,7 @@ body.login-page {
 }
 
 .login-side h2 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: clamp(36px, 4vw, 52px);
     margin-bottom: 18px;
     line-height: 1.05;

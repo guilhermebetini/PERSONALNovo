@@ -1,19 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar | OpiniAki</title>
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/entrar.css">
+    <title>Cadastrar | OpiniAki</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&family=Montserrat:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/entrar.css">
 </head>
+
 <body class="login-page">
     <header class="topbar">
-        <a href="index.guilherme.html#home" class="brand">Opini<span>Aki</span></a>
+        <a href="index.guilherme.html" class="brand">Opini<span>Aki</span></a>
 
         <div class="search">
             <input type="text" placeholder="Buscar no site..." aria-label="Buscar no site">
@@ -27,7 +27,7 @@
             <a href="contato.html">Contato</a>
         </nav>
 
-        <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+        <a href="entrar.html" class="topbar-cta">Entrar</a>
 
         <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
             <span></span>
@@ -39,15 +39,20 @@
             <div class="login-panel">
                 <aside class="login-side">
                     <div>
-                        <h2>Entrar no Site</h2>
-                        <p>Use o acesso de administrador para abrir o dashboard.</p>
+                        <h2>JÁ TEM UMA CONTA?</h2>
+                        <p>Clique em entrar para acessar o dashboard.</p>
                     </div>
-                    <a href="index.guilherme.html" class="login-panel-cta">Voltar ao início</a>
+                    <a href="entrar.html" class="login-panel-cta">Entrar</a>
                 </aside>
 
                 <div class="login-form-shell">
-                    <h2>LOGIN</h2>
-                    <form class="login-form" id="admin-login-form" action="#" method="post" novalidate>
+                    <h2>CADASTRAR</h2>
+                    <form class="login-form" id="register-form" action="#" method="post" novalidate>
+                        <div class="login-field">
+                            <i class="material-symbols-outlined">badge</i>
+                            <input type="text" name="nome" id="nome" placeholder="Nome">
+                        </div>
+
                         <div class="login-field">
                             <i class="material-symbols-outlined">person</i>
                             <input type="text" name="usuario" id="usuario" placeholder="Usuário" required>
@@ -58,47 +63,39 @@
                             <input type="password" name="senha" id="senha" placeholder="Senha" required>
                         </div>
 
-                        <button type="submit" class="button-primary">Entrar</button>
+                        <button type="submit" class="button-primary">Cadastrar</button>
                     </form>
-                    <p class="login-note" id="login-status">Acesso padrão: admin / admin123</p>
+                    <p class="login-note" id="register-status"></p>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        const ADMIN_USER = 'admin';
-        const ADMIN_PASS = 'admin123';
-        const AUTH_KEY = 'adminAuth';
-
-        const form = document.getElementById('admin-login-form');
+        const form = document.getElementById('register-form');
+        const nameInput = document.getElementById('nome');
         const userInput = document.getElementById('usuario');
         const passInput = document.getElementById('senha');
-        const statusText = document.getElementById('login-status');
+        const statusText = document.getElementById('register-status');
         const burger = document.querySelector('.burger');
         const menu = document.getElementById('menu-principal');
-
-        if (sessionStorage.getItem(AUTH_KEY) === '1') {
-            window.location.href = 'dashboard.html';
-        }
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
+            const name = nameInput.value.trim();
             const user = userInput.value.trim();
             const pass = passInput.value;
 
-            if (user === ADMIN_USER && pass === ADMIN_PASS) {
-                sessionStorage.setItem(AUTH_KEY, '1');
-                statusText.textContent = 'Login correto. Redirecionando...';
-                statusText.style.color = '#1f8a35';
-                window.location.href = 'dashboard.html';
+            if (name.length < 2 || user.length < 3 || pass.length < 4) {
+                statusText.textContent = 'Preencha nome, usuário e senha corretamente.';
+                statusText.style.color = '#b10f0f';
                 return;
             }
 
-            sessionStorage.removeItem(AUTH_KEY);
-            statusText.textContent = 'Usuário ou senha inválidos.';
-            statusText.style.color = '#b10f0f';
+            statusText.textContent = 'Cadastro enviado. Agora clique em Entrar.';
+            statusText.style.color = '#1f8a35';
+            form.reset();
         });
 
         burger.addEventListener('click', function () {

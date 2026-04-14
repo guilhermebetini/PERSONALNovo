@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpiniAki - Avaliação</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/avaliçao.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="topbar">
+        <a href="index.guilherme.html#home" class="brand">Opini<span>Aki</span></a>
+
+        <div class="search">
+            <input type="text" placeholder="Buscar no site..." aria-label="Buscar no site">
+            <button type="button" aria-label="Buscar"></button>
+        </div>
+
+        <nav class="menu" id="menu-principal">
+            <a href="index.guilherme.html">Home</a>
+            <a href="index.guilherme.html">Ambiente</a>
+            <a href="avaliçao.html" class="is-active">Avaliações</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+
+         <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+            <span></span>
+        </button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="ratings-wrap">
+                <h1>Avalie-nos!</h1>
+
+                <div class="ratings-grid">
+                    <article class="rating-item">
+                        <div class="rating-photo photo-pratos" aria-hidden="true"></div>
+                        <h2>PRATOS</h2>
+                        <p>Sushis e pratos preparados com sabor, cuidado e apresentação impecável.</p>
+                    </article>
+
+                    <article class="rating-item">
+                        <div class="rating-photo photo-atendimento" aria-hidden="true"></div>
+                        <h2>ATENDIMENTO</h2>
+                        <p>Equipe atenciosa, rápida e sempre pronta para oferecer a melhor experiência.</p>
+                    </article>
+
+                    <article class="rating-item">
+                        <div class="rating-photo photo-estabelecimento" aria-hidden="true"></div>
+                        <h2>ESTABELECIMENTO</h2>
+                        <p>Ambiente aconchegante, limpo e agradável para aproveitar cada momento.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const burger = document.querySelector('.burger');
+        const menu = document.querySelector('.menu');
+        const menuLinks = document.querySelectorAll('.menu a');
+
+        if (burger && menu) {
+            const alternarMenu = (aberto) => {
+                menu.classList.toggle('is-open', aberto);
+                burger.classList.toggle('is-open', aberto);
+                burger.setAttribute('aria-expanded', String(aberto));
+                burger.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+            };
+
+            burger.addEventListener('click', () => {
+                alternarMenu(!menu.classList.contains('is-open'));
+            });
+
+            menuLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    alternarMenu(false);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

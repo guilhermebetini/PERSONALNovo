@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 :root {
     --bg: #050505;
@@ -24,7 +24,7 @@ body {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     color: var(--text);
     background:
         radial-gradient(circle at 12% -10%, rgba(255, 59, 48, 0.18), transparent 38%),
@@ -65,7 +65,7 @@ input {
 .brand {
     display: inline-flex;
     align-items: baseline;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-size: 44px;
     font-weight: 700;
     line-height: 1;
