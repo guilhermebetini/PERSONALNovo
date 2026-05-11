@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,97 +14,375 @@
         }
     </script>
 
+    <!-- Sua Topbar Original -->
     <header class="topbar">
-        <a class="brand" href="index.guilherme.html"><span>Opini</span>Aki</a>
+        <a class="brand" href="index.guilherme.html">Opini<span>Aki</span></a>
 
         <form class="search" action="#" role="search">
             <button type="submit" aria-label="Buscar"></button>
             <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
         </form>
 
-        <nav class="menu" aria-label="Navegacao principal">
+        <nav class="menu" id="menu-principal" aria-label="Navegacao principal">
             <a class="is-active" href="dashboard.html">Home</a>
             <a href="index.guilherme.html">Ambiente</a>
-            <a href="avaliaçao.html">Avaliações</a>
+            <a href="avaliacao.html">Avaliações</a>
             <a href="contato.html">Contato</a>
         </nav>
 
         <a class="topbar-cta" id="logout-btn" href="entrar.html" role="button">Sair</a>
 
-        <button class="burger" type="button" aria-label="Abrir menu">
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
             <span>Menu</span>
         </button>
     </header>
 
-    <main class="dashboard-main">
-        <section class="dashboard-head">
-            <h1>Visao Geral</h1>
-            <p>Acompanhe os principais indicadores do seu ambiente em tempo real.</p>
-        </section>
+    <div class="app-container">
+        <!-- Sidebar Lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dashboard.html" class="nav-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="avaliaçao.html" class="nav-item">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Avaliações</span>
+                </a>
+                <a href="cadastrar.html" class="nav-item">
+                    <span class="material-symbols-outlined">restaurant</span>
+                    <span>Cadastrar Pratos</span>
+                </a>
+                <a href="produtos.html" class="nav-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Produtos</span>
+                </a>
+            </nav>
+        </aside>
 
-        <section class="pp-grid" aria-label="Indicadores do dashboard">
-            <article class="pp-card">
-                <h3><span class="material-symbols-outlined">group</span>Total de Alunos</h3>
-                <p class="pp-value">42</p>
-                <span class="pp-trend pp-trend-up">+12% neste mes</span>
-            </article>
+        <!-- Conteudo Principal -->
+        <main class="dashboard-content">
+            <div class="page-header">
+                <span class="material-symbols-outlined">badge</span>
+                <h1>Dashboard</h1>
+            </div>
 
-            <article class="pp-card">
-                <h3><span class="material-symbols-outlined">person_add</span>Novos Cadastros</h3>
-                <p class="pp-value">7</p>
-                <span class="pp-trend pp-trend-up">+3 em 7 dias</span>
-            </article>
-
-            <article class="pp-card">
-                <h3><span class="material-symbols-outlined">payments</span>Pagamentos Pendentes</h3>
-                <p class="pp-alert-val">3 mensalidades</p>
-                <small>Ultima atualizacao: hoje, 09:10</small>
-            </article>
-
-            <article class="pp-card pp-card-lg">
-                <h3><span class="material-symbols-outlined">event_note</span>Agenda de Hoje</h3>
-                <div class="pp-item">
-                    <div class="pp-item-text">
-                        <strong>Julia Silva</strong>
-                        <small>Treino de pernas</small>
+            <!-- Cards Estatisticas -->
+            <div class="stats-grid">
+                <div class="stat-card stat-red">
+                    <div class="stat-info">
+                        <h2>50</h2>
+                        <p>Novas Avaliações</p>
+                        <div class="stat-footer">
+                            <span>Ticket Medio 333,00</span>
+                            <span class="negative">- 30,020%</span>
+                        </div>
                     </div>
-                    <span class="pp-time-tag">08:00</span>
+                    <span class="stat-icon">
+                        <span class="material-symbols-outlined">contract_edit</span>
+                    </span>
                 </div>
-                <div class="pp-item">
-                    <div class="pp-item-text">
-                        <strong>Marcos Vinicius</strong>
-                        <small>Avaliacao fisica</small>
-                    </div>
-                    <span class="pp-time-tag">09:30</span>
-                </div>
-                <div class="pp-item">
-                    <div class="pp-item-text">
-                        <strong>Ana Paula</strong>
-                        <small>Treino funcional</small>
-                    </div>
-                    <span class="pp-time-tag">11:00</span>
-                </div>
-            </article>
 
-            <article class="pp-card">
-                <h3><span class="material-symbols-outlined">cake</span>Aniversariantes</h3>
-                <div class="pp-item">
-                    <div class="pp-item-text">
-                        <strong>Ricardo Jorge</strong>
-                        <small>13/04</small>
+                <div class="stat-card stat-orange">
+                    <div class="stat-info">
+                        <h2>23</h2>
+                        <p>Avaliações Lidas</p>
+                        <div class="stat-footer">
+                            <span>Ticket Medio 33570</span>
+                            <span class="negative">- 43,8%</span>
+                        </div>
                     </div>
-                    <span class="material-symbols-outlined pp-icon-celebrate">celebration</span>
+                    <span class="stat-icon">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </span>
                 </div>
-            </article>
 
-            <article class="pp-card">
-                <h3><span class="material-symbols-outlined">monitoring</span>Atividade Semanal</h3>
-                <div class="pp-chart-box">Grafico de desempenho</div>
-            </article>
-        </section>
-    </main>
+                <div class="stat-card stat-green">
+                    <div class="stat-info">
+                        <h2>42</h2>
+                        <p>Avaliações Respondidas</p>
+                        <div class="stat-footer">
+                            <span>Ticket Medio 326,09</span>
+                            <span class="negative">- 44,8%</span>
+                        </div>
+                    </div>
+                    <span class="stat-icon">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </span>
+                </div>
+
+                <div class="stat-card stat-yellow">
+                    <div class="stat-info">
+                        <h2>16</h2>
+                        <p>Produtos Cadastrados</p>
+                        <div class="stat-footer">
+                            <span>Produtos</span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <span class="stat-icon">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Grid Principal -->
+            <div class="dashboard-grid">
+                <!-- Resumo Avaliacoes -->
+                <div class="dashboard-card">
+                    <h3>Resumo das Avaliações</h3>
+                    
+                    <div class="charts-container">
+                        <div class="chart-section">
+                            <h4>Avaliações do Atendimento</h4>
+                            <div class="bar-chart">
+                                <div class="bar bar-full" style="height: 85%"></div>
+                                <div class="bar bar-full" style="height: 72%"></div>
+                                <div class="bar bar-light" style="height: 50%"></div>
+                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="chart-labels">
+                                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-section">
+                            <h4>Avaliações do Estabelecimento</h4>
+                            <div class="bar-chart">
+                                <div class="bar bar-full" style="height: 85%"></div>
+                                <div class="bar bar-full" style="height: 72%"></div>
+                                <div class="bar bar-light" style="height: 50%"></div>
+                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="chart-labels">
+                                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desempenho Geral -->
+                <div class="dashboard-card">
+                    <h3>Desempenho Geral</h3>
+                    
+                    <div class="rating-container">
+                        <div class="rating-circle">
+                            <div class="circle-inner">
+                                <span class="rating-value">4,7</span>
+                                <div class="rating-stars">
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rating-info">
+                            <div class="rating-summary">
+                                <span>4 & 1s</span>
+                                <div class="mini-stars">
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined filled">star</span>
+                                </div>
+                            </div>
+                            
+                            <div class="rating-breakdown">
+                                <div class="breakdown-item">
+                                    <span class="dot green"></span>
+                                    <span>App</span>
+                                    <span class="material-symbols-outlined">reviews</span>
+                                    <span>354</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="dot red"></span>
+                                    <span>Sittets</span>
+                                    <span class="material-symbols-outlined">reviews</span>
+                                    <span>276</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="dot black"></span>
+                                    <span>Outros</span>
+                                    <span class="material-symbols-outlined">reviews</span>
+                                    <span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produtos Mais Avaliados -->
+                <div class="dashboard-card">
+                    <h3>Produtos Mais Avaliados</h3>
+                    
+                     <!-- foto da comida-->
+                    <div class="product-list">
+                        <div class="product-item">
+                            <div class="product-img"></div>
+                            <div class="product-info">
+                                <h4>Comida japa</h4>
+                                <small>Dalínguo do: 993.4.084</small>
+                            </div>
+                            <span class="product-count">84</span>
+                            <div class="product-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="product-rating">4.8</span>
+                        </div>
+
+                        <div class="product-item">
+                            <div class="product-img"></div>
+                            <div class="product-info">
+                                <h4>Japa</h4>
+                                <small>Dalínguo do: 093.4.094</small>
+                            </div>
+                            <span class="product-count">67</span>
+                            <div class="product-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="product-rating">4.7</span>
+                        </div>
+
+                        <div class="product-item">
+                            <div class="product-img"></div>
+                            <div class="product-info">
+                                <h4>japa</h4>
+                                <small>Dalínguo do: 093.4.002</small>
+                            </div>
+                            <span class="product-count">45</span>
+                            <div class="product-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="product-rating">4.6</span>
+                        </div>
+
+                        <div class="product-item">
+                            <div class="product-img"></div>
+                            <div class="product-info">
+                                <h4>Japa</h4>
+                                <small>Dalínguo ob: 993.4.004</small>
+                            </div>
+                            <span class="product-count">39</span>
+                            <div class="product-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="product-rating">4.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ultimas Avaliacoes -->
+                <div class="dashboard-card">
+                    <h3>Ũltimas Avaliações</h3>
+                    
+                    <div class="reviews-list">
+                        <div class="review-item">
+                            <div class="review-avatar">👨🏻</div>
+                            <div class="review-info">
+                                <h4>João Pedro</h4>
+                                <p>Hamburguer Especial</p>
+                            </div>
+                            <div class="review-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="review-time">15 min</span>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-avatar">👩🏻</div>
+                            <div class="review-info">
+                                <h4>Ana Clara</h4>
+                                <p>Pizza de Peperoni</p>
+                            </div>
+                            <div class="review-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                            </div>
+                            <span class="review-time">30 min</span>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-avatar">👨🏻</div>
+                            <div class="review-info">
+                                <h4>Ricardo Lima</h4>
+                                <p>Salada Caesar</p>
+                            </div>
+                            <div class="review-stars">
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined filled">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                            </div>
+                            <span class="review-time">1 h</span>
+                        </div>
+                    </div>
+
+                    <button class="view-all-btn">
+                        <span class="material-symbols-outlined">visibility</span>
+                        Ver todas avaliações
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <script>
+        const burger = document.querySelector('.burger');
+        const menu = document.querySelector('.menu');
+        const menuLinks = document.querySelectorAll('.menu a');
         const logoutBtn = document.getElementById('logout-btn');
+
+        if (burger && menu) {
+            const alternarMenu = (aberto) => {
+                menu.classList.toggle('is-open', aberto);
+                burger.classList.toggle('is-open', aberto);
+                burger.setAttribute('aria-expanded', String(aberto));
+                burger.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+            };
+
+            burger.addEventListener('click', () => {
+                alternarMenu(!menu.classList.contains('is-open'));
+            });
+
+            menuLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    alternarMenu(false);
+                });
+            });
+        }
+
         if (logoutBtn) {
             logoutBtn.addEventListener('click', function () {
                 sessionStorage.removeItem('adminAuth');
@@ -113,7 +391,3 @@
     </script>
 </body>
 </html>
-
-
-
-
