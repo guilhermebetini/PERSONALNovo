@@ -1,19 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar | OpiniAki</title>
+    <title>Cadastrar-se | OpiniAki</title>
+    <link rel="stylesheet" href="../css/layout.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&family=Montserrat:wght@400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/entrar.css-+-">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body class="login-page">
     <header class="topbar">
-        <a href="index.guilherme.html" class="brand">Opini<span>Aki</span></a>
+        <a href="index.guilherme.html#home" class="brand">Opini<span>Aki</span></a>
 
         <div class="search">
             <input type="text" placeholder="Buscar no site..." aria-label="Buscar no site">
@@ -46,7 +45,7 @@
                 </aside>
 
                 <div class="login-form-shell">
-                    <h2>CADASTRAR</h2>
+                    <h2>CADASTRAR-SE</h2>
                     <form class="login-form" id="register-form" action="#" method="post" novalidate>
                         <div class="login-field">
                             <i class="material-symbols-outlined"></i>
@@ -55,7 +54,7 @@
 
                         <div class="login-field">
                             <i class="material-symbols-outlined"></i>
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuário" required>
+                            <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
                         </div>
 
                         <div class="login-field">
@@ -63,7 +62,7 @@
                             <input type="password" name="senha" id="senha" placeholder="Senha" required>
                         </div>
 
-                        <button type="submit" class="button-primary">Cadastrar</button>
+                        <button type="submit" class="button-primary">Cadastrar-se</button>
                     </form>
                     <p class="login-note" id="register-status"></p>
                 </div>
@@ -88,7 +87,7 @@
             const pass = passInput.value;
 
             if (name.length < 2 || user.length < 3 || pass.length < 4) {
-                statusText.textContent = 'Preencha nome, usuário e senha corretamente.';
+                statusText.textContent = 'Preencha nome, usuario e senha corretamente.';
                 statusText.style.color = '#b10f0f';
                 return;
             }

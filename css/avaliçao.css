@@ -28,7 +28,7 @@ main,
 }
 
 .hero-bg {
-    background: url('imgs/Mesa elegante e acolhedora.png') center/cover no-repeat;
+    background: url('../imgs/Mesa elegante e acolhedora.png') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -82,15 +82,15 @@ main,
 }
 
 .photo-pratos {
-    background-image: url('imgs/8k.jpg');
+    background-image: url('../imgs/8k.jpg');
 }
 
 .photo-atendimento {
-    background-image: url('imgs/avaliacao-de-atendimento.jpg');
+    background-image: url('../imgs/avaliacao-de-atendimento.jpg');
 }
 
 .photo-estabelecimento {
-    background-image: url('imgs/imagemtelainicial.png');
+    background-image: url('../imgs/imagemtelainicial.png');
 }
 
 .rating-item h2 {
