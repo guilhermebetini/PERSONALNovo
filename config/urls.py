@@ -17,6 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from .views import pagina
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', pagina('paginaInicial.html'), name='inicio'),
+    path('paginaInicial.html', pagina('paginaInicial.html'), name='pagina-inicial'),
+    path('index.guilherme.html', pagina('paginaInicial.html'), name='index-legado'),
+    path('avaliacao.html', pagina('avaliacao.html'), name='avaliacao'),
+    path('avaliçao.html', pagina('avaliacao.html'), name='avaliacao-legado'),
+    path('contato.html', pagina('contato.html'), name='contato'),
+    path('cadastrar.html', pagina('cadastrar.html'), name='cadastrar'),
+    path('serviço.html', pagina('serviço.html'), name='servico'),
+    path('dashboard.html', pagina('dashboard.html'), name='dashboard'),
+    path('entrar.html', pagina('cadastrar.html'), name='entrar'),
+    path('produtos.html', pagina('serviço.html'), name='produtos'),
 ]
