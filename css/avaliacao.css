@@ -82,7 +82,7 @@ main,
 }
 
 .photo-pratos {
-    background-image: url('../imgs/8k.jpg');
+    background-image: url('../imgs/imagemtelainicial.png');
 }
 
 .photo-atendimento {
@@ -90,7 +90,7 @@ main,
 }
 
 .photo-estabelecimento {
-    background-image: url('../imgs/imagemtelainicial.png');
+    background-image: url('../imgs/8k.jpg');
 }
 
 .rating-item h2 {
