@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliar pratos | OpiniAki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/avaliar.css">
+</head>
+<body data-page="dishes" data-category="pratos">
+    <header class="topbar">
+        <a href="paginaInicial.html" class="brand">Opini<span>Aki</span></a>
+        <div class="search"><input type="search" placeholder="Buscar no site..." aria-label="Buscar no site"><button type="button" aria-label="Buscar"></button></div>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal">
+            <a href="paginaInicial.html">Home</a>
+            <a href="paginaInicial.html">Ambiente</a>
+            <a href="avaliacao.html" class="is-active">Avaliações</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+        <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal"><span></span></button>
+    </header>
+
+    <main class="rating-page">
+        <div class="rating-page-shell">
+            <header class="page-heading">
+                <span class="eyebrow">OpiniAki</span>
+                <h1>Avalie nossos pratos</h1>
+                <p>Escolha um prato do cardápio e compartilhe sua experiência. A sua opinião nos ajuda a aperfeiçoar cada detalhe.</p>
+            </header>
+
+            <section class="content-panel dishes-layout" aria-labelledby="dishes-title">
+                <div>
+                    <div class="section-title">
+                        <h2 id="dishes-title">Pratos disponíveis</h2>
+                        <span class="dish-count" id="dish-count" aria-live="polite"></span>
+                    </div>
+                    <div class="dish-grid" id="dish-list" aria-live="polite"></div>
+                </div>
+
+                <section class="form-area content-panel" id="dish-review-area" hidden aria-labelledby="dish-review-title">
+                    <div class="form-heading">
+                        <div>
+                            <h2 id="dish-review-title">Avaliar prato</h2>
+                            <p id="selected-dish-name"></p>
+                        </div>
+                        <button class="close-form" type="button" id="close-dish-review" aria-label="Fechar formulário de avaliação">×</button>
+                    </div>
+                    <form class="rating-form" id="dish-review-form" novalidate>
+                        <input type="hidden" id="reviewed-dish-id">
+                        <div>
+                            <p class="rating-label" id="dish-rating-label">Qual nota você dá para este prato?</p>
+                            <div class="star-rating" data-rating-group aria-labelledby="dish-rating-label">
+                                <button class="star-button" type="button" data-value="1" aria-label="1 estrela" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="2" aria-label="2 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="3" aria-label="3 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="4" aria-label="4 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="5" aria-label="5 estrelas" aria-pressed="false">★</button>
+                            </div>
+                            <input type="hidden" name="rating" required>
+                            <p class="rating-feedback" aria-live="polite"></p>
+                        </div>
+                        <div class="form-field">
+                            <label for="dish-comment">Comentário</label>
+                            <textarea id="dish-comment" name="comment" maxlength="500" placeholder="Conte-nos o que achou deste prato."></textarea>
+                        </div>
+                        <div class="form-actions"><button class="button-primary" type="submit">Enviar avaliação</button><button class="button-secondary" type="button" id="cancel-dish-review">Cancelar</button></div>
+                    </form>
+                    <p class="status-message" id="dish-review-status" role="status"></p>
+                </section>
+
+            </section>
+        </div>
+    </main>
+    <script src="/static/js/avaliacoes.js?v=5"></script>
+</body>
+</html>

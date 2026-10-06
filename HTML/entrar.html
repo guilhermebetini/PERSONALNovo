@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | OpiniAki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&family=Montserrat:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/entrar.css">
+</head>
+<body class="login-page">
+    <header class="topbar">
+        <a href="paginaInicial.html" class="brand">Opini<span>Aki</span></a>
+        <div class="search">
+            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
+            <button type="button" aria-label="Buscar"></button>
+        </div>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal">
+            <a href="paginaInicial.html">Home</a>
+            <a href="paginaInicial.html">Ambiente</a>
+            <a href="avaliacao.html">Avaliações</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+        <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal"><span></span></button>
+    </header>
+
+    <main class="login-page-main">
+        <section class="login-screen">
+            <div class="login-panel">
+                <aside class="login-side">
+                    <div>
+                        <h2>BEM-VINDO DE VOLTA!</h2>
+                        <p>Entre para acompanhar as avaliações e acessar o painel do OpiniAki.</p>
+                    </div>
+                    <a href="cadastrar.html" class="login-panel-cta">Criar conta</a>
+                </aside>
+                <div class="login-form-shell">
+                    <h2>ENTRAR</h2>
+                    <form class="login-form" id="login-form" novalidate>
+                        <div class="login-field">
+                            <i class="material-symbols-outlined" aria-hidden="true">person</i>
+                            <input type="text" name="usuario" id="usuario" placeholder="Usuário" autocomplete="username" required>
+                        </div>
+                        <div class="login-field">
+                            <i class="material-symbols-outlined" aria-hidden="true">lock</i>
+                            <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="current-password" required>
+                        </div>
+                        <button type="submit" class="button-primary">Entrar</button>
+                    </form>
+                    <p class="login-note" id="login-status" role="status" aria-live="polite"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const statusText = document.getElementById('login-status');
+        const burger = document.querySelector('.burger');
+        const menu = document.getElementById('menu-principal');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const user = form.elements.usuario.value.trim();
+            const password = form.elements.senha.value;
+
+            if (user.length < 3 || password.length < 4) {
+                statusText.textContent = 'Informe um usuário com pelo menos 3 caracteres e uma senha com pelo menos 4.';
+                statusText.style.color = '#b10f0f';
+                return;
+            }
+
+            sessionStorage.setItem('adminAuth', '1');
+            sessionStorage.setItem('adminUser', user);
+            window.location.href = 'dashboard.html';
+        });
+
+        burger.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('is-open');
+            burger.classList.toggle('is-open', isOpen);
+            burger.setAttribute('aria-expanded', String(isOpen));
+        });
+    </script>
+</body>
+</html>

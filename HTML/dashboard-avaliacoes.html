@@ -1,0 +1,128 @@
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações | OpiniAki</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="stylesheet" href="/static/css/dashboard.css?v=4">
+    <link rel="stylesheet" href="/static/css/dashboard-avaliacoes.css?v=1">
+</head>
+<body class="reviews-dashboard-page">
+    <script>
+        if (sessionStorage.getItem('adminAuth') !== '1') {
+            window.location.href = 'entrar.html';
+        }
+    </script>
+
+    <header class="topbar">
+        <a class="brand" href="dashboard.html">Opini<span>Aki</span></a>
+        <form class="search" role="search" onsubmit="return false">
+            <button type="submit" aria-label="Buscar"></button>
+            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
+        </form>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard-avaliacoes.html" class="is-active" aria-current="page">Avaliações</a>
+            <a href="paginaInicial.html">Ambiente</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+        <a class="topbar-cta" id="logout-btn" href="entrar.html" role="button">Sair</a>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+            <span>Menu</span>
+        </button>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Painel administrativo">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dashboard-avaliacoes.html" class="nav-item active" aria-current="page">
+                    <span class="material-symbols-outlined">reviews</span>
+                    <span>Avaliações</span>
+                </a>
+                <a href="dashboard.html#cadastrar-pratos" class="nav-item">
+                    <span class="material-symbols-outlined">restaurant</span>
+                    <span>Cadastrar Pratos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-content reviews-content">
+            <header class="reviews-page-heading">
+                <div>
+                    <span class="reviews-eyebrow">OPINIAKI · PAINEL ADMINISTRATIVO</span>
+                    <h1>Avaliações</h1>
+                    <p>Acompanhe as notas e os comentários enviados pelos clientes.</p>
+                </div>
+                <a class="reviews-back-link" href="dashboard.html">
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                    Voltar ao dashboard
+                </a>
+            </header>
+
+            <section class="review-stat-grid" aria-label="Total de avaliações por categoria">
+                <article class="review-stat-card review-stat-card--total">
+                    <span class="review-stat-icon material-symbols-outlined" aria-hidden="true">forum</span>
+                    <p>Total de avaliações</p>
+                    <strong id="review-total-count">0</strong>
+                </article>
+                <article class="review-stat-card review-stat-card--service">
+                    <span class="review-stat-icon material-symbols-outlined" aria-hidden="true">support_agent</span>
+                    <p>Atendimento</p>
+                    <strong id="review-service-count">0</strong>
+                </article>
+                <article class="review-stat-card review-stat-card--dishes">
+                    <span class="review-stat-icon material-symbols-outlined" aria-hidden="true">restaurant</span>
+                    <p>Pratos</p>
+                    <strong id="review-dishes-count">0</strong>
+                </article>
+                <article class="review-stat-card review-stat-card--place">
+                    <span class="review-stat-icon material-symbols-outlined" aria-hidden="true">storefront</span>
+                    <p>Estabelecimento</p>
+                    <strong id="review-place-count">0</strong>
+                </article>
+            </section>
+
+            <div class="reviews-live-status" id="reviews-live-status" role="status" aria-live="polite">
+                Carregando avaliações...
+            </div>
+
+            <div class="reviews-data-grid">
+                <section class="dashboard-card top-dishes-card" aria-labelledby="top-dishes-title">
+                    <div class="reviews-section-heading">
+                        <div>
+                            <span class="reviews-section-kicker">DESTAQUES DO CARDÁPIO</span>
+                            <h2 id="top-dishes-title">Pratos mais avaliados</h2>
+                        </div>
+                        <span class="material-symbols-outlined" aria-hidden="true">leaderboard</span>
+                    </div>
+                    <div id="top-dishes-list" class="top-dishes-list" aria-live="polite"></div>
+                </section>
+
+                <section class="dashboard-card all-reviews-card" aria-labelledby="all-reviews-title">
+                    <div class="reviews-section-heading reviews-list-heading">
+                        <div>
+                            <span class="reviews-section-kicker">OPINIÃO DOS CLIENTES</span>
+                            <h2 id="all-reviews-title">Últimas avaliações</h2>
+                        </div>
+                        <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+                    </div>
+                    <div class="review-filters" role="group" aria-label="Filtrar avaliações">
+                        <button type="button" class="review-filter is-active" data-filter="todas" aria-pressed="true">Todas</button>
+                        <button type="button" class="review-filter" data-filter="pratos" aria-pressed="false">Pratos</button>
+                        <button type="button" class="review-filter" data-filter="atendimento" aria-pressed="false">Atendimento</button>
+                        <button type="button" class="review-filter" data-filter="estabelecimento" aria-pressed="false">Estabelecimento</button>
+                    </div>
+                    <div id="all-reviews-list" class="all-reviews-list" aria-live="polite"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/dashboard-avaliacoes.js?v=1"></script>
+</body>
+</html>

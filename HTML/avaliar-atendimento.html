@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliar atendimento | OpiniAki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/avaliar.css">
+</head>
+<body data-page="experience" data-category="atendimento" data-category-label="atendimento">
+    <header class="topbar">
+        <a href="paginaInicial.html" class="brand">Opini<span>Aki</span></a>
+        <div class="search"><input type="search" placeholder="Buscar no site..." aria-label="Buscar no site"><button type="button" aria-label="Buscar"></button></div>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal"><a href="paginaInicial.html">Home</a><a href="paginaInicial.html">Ambiente</a><a href="avaliacao.html" class="is-active">Avaliações</a><a href="contato.html">Contato</a></nav>
+        <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal"><span></span></button>
+    </header>
+
+    <main class="rating-page">
+        <div class="rating-page-shell">
+            <header class="page-heading">
+                <span class="eyebrow">Sua experiência</span>
+                <h1>Avalie nosso atendimento</h1>
+                <p>Conte como foi o contato com a nossa equipe. Sua avaliação ajuda a tornar cada visita ainda melhor.</p>
+            </header>
+
+            <section class="content-panel single-rating-panel service-rating-panel" aria-labelledby="service-rating-title">
+                <div class="experience-panel-header">
+                    <span class="experience-panel-icon" aria-hidden="true">✦</span>
+                    <div>
+                        <p class="panel-kicker">Experiência de atendimento</p>
+                        <h2 id="service-rating-title">Como foi o atendimento?</h2>
+                        <p class="panel-description">Considere estes pontos antes de deixar sua nota.</p>
+                    </div>
+                </div>
+
+                <ul class="criteria-list service-criteria-list" aria-label="Critérios de avaliação">
+                    <li><span class="criterion-number">01</span><strong>Cordialidade</strong><span>Gentileza em cada contato.</span></li>
+                    <li><span class="criterion-number">02</span><strong>Rapidez</strong><span>Agilidade do início ao fim.</span></li>
+                    <li><span class="criterion-number">03</span><strong>Atenção</strong><span>Cuidado com seus pedidos.</span></li>
+                    <li><span class="criterion-number">04</span><strong>Qualidade</strong><span>Excelência no serviço.</span></li>
+                </ul>
+
+                <div class="rating-form-surface">
+                    <form class="rating-form" id="experience-review-form" novalidate>
+                        <div>
+                            <p class="rating-label" id="service-rating-label">Escolha uma nota de 1 a 5 estrelas</p>
+                            <div class="star-rating" data-rating-group aria-labelledby="service-rating-label">
+                                <button class="star-button" type="button" data-value="1" aria-label="1 estrela" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="2" aria-label="2 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="3" aria-label="3 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="4" aria-label="4 estrelas" aria-pressed="false">★</button>
+                                <button class="star-button" type="button" data-value="5" aria-label="5 estrelas" aria-pressed="false">★</button>
+                            </div>
+                            <input type="hidden" name="rating" required>
+                            <p class="rating-feedback" aria-live="polite"></p>
+                        </div>
+                        <div class="form-field"><label for="service-comment">Comentário</label><textarea id="service-comment" name="comment" maxlength="500" placeholder="O que podemos manter ou melhorar no atendimento?"></textarea></div>
+                        <div class="form-actions"><button class="button-primary" type="submit">Enviar avaliação</button><a class="button-secondary" href="avaliacao.html">Voltar</a></div>
+                    </form>
+                </div>
+                <p class="status-message" id="experience-review-status" role="status"></p>
+            </section>
+        </div>
+    </main>
+    <script src="/static/js/avaliacoes.js?v=5"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+main,
+.hero { position: relative; min-height: 100vh; }
+
+.hero-bg,
+.hero-overlay { position: absolute; inset: 0; }
+
+.hero-bg { background: url('../imgs/Mesa elegante e acolhedora.png') center / cover no-repeat; }
+.hero-overlay { background: linear-gradient(180deg, rgba(12, 8, 5, 0.58), rgba(12, 8, 5, 0.84)); }
+
+.ratings-wrap {
+    position: relative;
+    z-index: 1;
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 154px 0 70px;
+    text-align: center;
+}
+
+.ratings-kicker {
+    display: inline-block;
+    padding: 9px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff2dd;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.ratings-wrap h1 {
+    margin: 18px 0 12px;
+    color: #f8f2e8;
+    font-size: clamp(40px, 5vw, 56px);
+    letter-spacing: 0.02em;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.ratings-intro {
+    max-width: 620px;
+    margin: 0 auto 46px;
+    color: rgba(255, 246, 229, 0.92);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.ratings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.rating-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+    overflow: hidden;
+    padding: 30px 25px 25px;
+    border: 1px solid rgba(255, 239, 222, 0.2);
+    border-radius: 30px;
+    background: linear-gradient(160deg, rgba(255, 250, 239, 0.16), rgba(28, 18, 14, 0.42));
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    color: inherit;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.rating-item::before {
+    content: '';
+    position: absolute;
+    top: -92px;
+    right: -72px;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 191, 145, 0.2), transparent 68%);
+    pointer-events: none;
+}
+
+.rating-item:hover,
+.rating-item:focus-visible {
+    transform: translateY(-8px);
+    border-color: rgba(255, 222, 189, 0.72);
+    background: linear-gradient(160deg, rgba(255, 250, 239, 0.24), rgba(53, 26, 17, 0.52));
+    box-shadow: 0 30px 62px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.rating-photo {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: min(300px, 72vw);
+    flex: 0 0 auto;
+    aspect-ratio: 1;
+    margin: 0 auto 24px;
+    border: 5px solid rgba(255, 255, 255, 0.46);
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(255, 229, 205, 0.08);
+    transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+.photo-pratos { background-image: url('../imgs/imagemtelainicial.png'); }
+.photo-atendimento { background-image: url('../imgs/avaliacao-de-atendimento.jpg'); }
+.photo-estabelecimento { background-image: url('../imgs/8k.jpg'); }
+
+.rating-content { position: relative; z-index: 1; display: flex; flex: 1; flex-direction: column; align-items: center; text-align: center; }
+.rating-item-title { display: block; margin-bottom: 12px; color: #fff7ee; font-size: clamp(27px, 2.7vw, 39px); font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; }
+.rating-item-text { display: block; max-width: 300px; color: rgba(255, 246, 229, 0.92); font-size: 16px; line-height: 1.6; }
+.rating-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; margin-top: auto; padding: 0 18px; border: 1px solid rgba(255, 222, 197, 0.25); border-radius: 999px; background: rgba(255, 239, 224, 0.1); color: #ffe2ce; font-size: 13px; font-weight: 800; }
+.rating-link span { margin-left: 4px; font-size: 18px; transition: transform 180ms ease; }
+.rating-item:hover .rating-link span,
+.rating-item:focus-visible .rating-link span { display: inline-block; transform: translateX(5px); }
+.rating-item:hover .rating-photo,
+.rating-item:focus-visible .rating-photo { transform: scale(1.045); box-shadow: 0 22px 40px rgba(0, 0, 0, 0.48), 0 0 0 10px rgba(255, 229, 205, 0.12); }
+
+@media (max-width: 980px) {
+    .ratings-grid { grid-template-columns: 1fr; }
+    .rating-item { width: min(100%, 580px); max-width: 580px; margin: 0 auto; }
+    .ratings-wrap { padding-top: 176px; padding-bottom: 48px; }
+}
+
+@media (max-width: 560px) {
+    .ratings-wrap { width: min(100% - 28px, 1200px); padding-top: 154px; }
+    .ratings-intro { margin-bottom: 32px; font-size: 16px; }
+    .rating-item { min-height: 500px; padding: 24px 20px 20px; }
+    .rating-photo { width: min(230px, 64vw); margin-bottom: 20px; }
+}
