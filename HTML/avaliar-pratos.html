@@ -72,21 +72,9 @@
                     <p class="status-message" id="dish-review-status" role="status"></p>
                 </section>
 
-                <details class="dish-registration" id="dish-registration">
-                    <summary>Cadastrar novo prato</summary>
-                    <form class="rating-form registration-form" id="dish-registration-form" novalidate>
-                        <div class="form-field"><label for="dish-name">Nome do prato</label><input id="dish-name" name="name" type="text" maxlength="80" required></div>
-                        <div class="form-field"><label for="dish-category">Categoria</label><select id="dish-category" name="category"><option value="Sushi">Sushi</option><option value="Entrada">Entrada</option><option value="Prato quente">Prato quente</option><option value="Sobremesa">Sobremesa</option><option value="Bebida">Bebida</option></select></div>
-                        <div class="form-field full-width"><label for="dish-description">Descrição</label><textarea id="dish-description" name="description" maxlength="250" required placeholder="Descreva ingredientes, sabores ou características do prato."></textarea></div>
-                        <div class="form-field"><label for="dish-image-url">URL da imagem <span class="form-help">(opcional)</span></label><input id="dish-image-url" name="imageUrl" type="url" placeholder="https://exemplo.com/imagem.jpg"></div>
-                        <div class="form-field"><label for="dish-image-file">Ou envie uma imagem <span class="form-help">(até 1,5 MB)</span></label><input id="dish-image-file" name="imageFile" type="file" accept="image/*"></div>
-                        <div class="form-actions full-width"><button class="button-primary" type="submit">Cadastrar prato</button></div>
-                    </form>
-                    <p class="status-message" id="dish-registration-status" role="status"></p>
-                </details>
             </section>
         </div>
     </main>
-    <script src="/static/js/avaliacoes.js"></script>
+    <script src="/static/js/avaliacoes.js?v=5"></script>
 </body>
 </html>

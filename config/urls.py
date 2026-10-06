@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import pagina
+from .views import evaluations_api, pagina
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/avaliacoes/', evaluations_api, name='avaliacoes-api'),
     path('', pagina('paginaInicial.html'), name='inicio'),
     path('paginaInicial.html', pagina('paginaInicial.html'), name='pagina-inicial'),
     path('index.guilherme.html', pagina('paginaInicial.html'), name='index-legado'),
@@ -31,8 +32,9 @@ urlpatterns = [
     path('avaliçao.html', pagina('avaliacao.html'), name='avaliacao-legado'),
     path('contato.html', pagina('contato.html'), name='contato'),
     path('cadastrar.html', pagina('cadastrar.html'), name='cadastrar'),
+    path('entrar.html', pagina('entrar.html'), name='entrar'),
     path('serviço.html', pagina('serviço.html'), name='servico'),
     path('dashboard.html', pagina('dashboard.html'), name='dashboard'),
-    path('entrar.html', pagina('cadastrar.html'), name='entrar'),
+    path('dashboard-avaliacoes.html', pagina('dashboard-avaliacoes.html'), name='dashboard-avaliacoes'),
     path('produtos.html', pagina('serviço.html'), name='produtos'),
 ]

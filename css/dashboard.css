@@ -814,3 +814,294 @@ button {
     }
 }
 
+.dish-management {
+    margin-bottom: 32px;
+    scroll-margin-top: 140px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 57, 70, 0.12);
+    background:
+        radial-gradient(circle at 100% 0, rgba(230, 57, 70, 0.08), transparent 28%),
+        #fff;
+}
+
+.dish-management-heading,
+.dish-admin-catalog-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.dish-management-heading {
+    margin-bottom: 24px;
+}
+
+.dish-management-kicker {
+    display: inline-flex;
+    margin-bottom: 9px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.dish-management-heading h2 {
+    color: var(--text-dark);
+    font-size: clamp(24px, 3vw, 30px);
+    letter-spacing: -0.035em;
+}
+
+.dish-management-heading p {
+    margin-top: 8px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.dish-management-heading > .material-symbols-outlined {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #fff0f0, #ffe1e3);
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.dish-management .dish-admin-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding: clamp(18px, 3vw, 28px);
+    border: 1px solid #f0e4e5;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #fffafa, #fff 72%);
+    box-shadow: 0 12px 30px rgba(32, 18, 20, 0.045);
+}
+
+.dish-management .dish-admin-field {
+    display: grid;
+    gap: 8px;
+}
+
+.dish-management .dish-admin-field--wide,
+.dish-management .dish-admin-actions {
+    grid-column: 1 / -1;
+}
+
+.dish-management .dish-admin-field label {
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dish-management .dish-admin-field label span {
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.dish-management .dish-admin-field input,
+.dish-management .dish-admin-field select,
+.dish-management .dish-admin-field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #e0dfe4;
+    border-radius: 13px;
+    background: #fff;
+    color: var(--text-dark);
+    font: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.dish-management .dish-admin-field input[type="file"] {
+    padding: 9px;
+    background: #fff;
+}
+
+.dish-management .dish-admin-field textarea {
+    min-height: 112px;
+    resize: vertical;
+}
+
+.dish-management .dish-admin-field input:focus,
+.dish-management .dish-admin-field select:focus,
+.dish-management .dish-admin-field textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.12);
+}
+
+.dish-management .dish-admin-field input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 9px;
+    background: #fff0f0;
+    color: #b4232f;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.dish-management .dish-admin-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.dish-management .dish-admin-submit,
+.dashboard-dish-remove {
+    min-height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.dish-management .dish-admin-submit {
+    background: linear-gradient(135deg, #f04452, #d62839);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(214, 40, 57, 0.2);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.dish-management .dish-admin-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(214, 40, 57, 0.26);
+}
+
+.dish-management .dish-admin-status {
+    min-height: 20px;
+    color: #16803c;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.dish-management .dish-admin-status.is-error {
+    color: #b42318;
+}
+
+.dish-admin-catalog {
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid #e8e9ed;
+}
+
+.dish-admin-catalog-heading {
+    margin-bottom: 16px;
+}
+
+.dish-admin-catalog-heading h3 {
+    color: var(--text-dark);
+    font-size: 19px;
+}
+
+.dish-admin-catalog-heading span {
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashboard-dish-list {
+    display: grid;
+    gap: 10px;
+}
+
+.dashboard-dish-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #eeeef1;
+    border-radius: 15px;
+    background: #fff;
+    transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.dashboard-dish-item:hover {
+    transform: translateY(-1px);
+    border-color: #f1c4c7;
+}
+
+.dashboard-dish-item img {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #f1f2f5;
+}
+
+.dashboard-dish-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.dashboard-dish-details h4 {
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.dashboard-dish-details p {
+    overflow: hidden;
+    color: var(--text-light);
+    font-size: 13px;
+    text-overflow: ellipsis;
+}
+
+.dashboard-dish-remove {
+    flex: 0 0 auto;
+    border: 1px solid #f1b7bb;
+    background: #fff5f5;
+    color: #b4232f;
+}
+
+.dashboard-dish-remove:hover {
+    background: #ffe6e8;
+}
+
+.dashboard-dish-empty {
+    padding: 18px;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.dashboard-live-status {
+    margin: -18px 0 26px;
+    color: var(--text-light);
+    font-size: 13px;
+    text-align: right;
+}
+
+.dashboard-live-status.is-error {
+    color: #b42318;
+}
+
+@media (max-width: 600px) {
+    .dish-management .dish-admin-form {
+        grid-template-columns: 1fr;
+    }
+
+    .dish-management .dish-admin-field--wide,
+    .dish-management .dish-admin-actions {
+        grid-column: auto;
+    }
+
+    .dashboard-dish-item {
+        align-items: flex-start;
+    }
+
+    .dashboard-dish-item img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .dashboard-dish-details p {
+        white-space: normal;
+    }
+}

@@ -55,7 +55,7 @@ main,
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 440px;
+    min-height: 560px;
     overflow: hidden;
     padding: 30px 25px 25px;
     border: 1px solid rgba(255, 239, 222, 0.2);
@@ -93,7 +93,8 @@ main,
     display: block;
     position: relative;
     z-index: 1;
-    width: min(240px, 62vw);
+    width: min(300px, 72vw);
+    flex: 0 0 auto;
     aspect-ratio: 1;
     margin: 0 auto 24px;
     border: 5px solid rgba(255, 255, 255, 0.46);
@@ -127,6 +128,6 @@ main,
 @media (max-width: 560px) {
     .ratings-wrap { width: min(100% - 28px, 1200px); padding-top: 154px; }
     .ratings-intro { margin-bottom: 32px; font-size: 16px; }
-    .rating-item { min-height: 410px; padding: 24px 20px 20px; }
-    .rating-photo { width: min(200px, 58vw); margin-bottom: 20px; }
+    .rating-item { min-height: 500px; padding: 24px 20px 20px; }
+    .rating-photo { width: min(230px, 64vw); margin-bottom: 20px; }
 }

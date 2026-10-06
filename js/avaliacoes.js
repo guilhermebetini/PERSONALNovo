@@ -5,11 +5,11 @@
     const REVIEWS_KEY = 'opiniaki_reviews_v1';
     const MAX_IMAGE_SIZE = 1.5 * 1024 * 1024;
     const initialDishes = [
-        { id: 'combo-sushi', name: 'Combo Sushi Especial', category: 'Sushi', description: 'Seleção do chef com sushis frescos e peças especiais.', image: '../imgs/imagemtelainicial.png' },
-        { id: 'temaki-salmao', name: 'Temaki de Salmão', category: 'Sushi', description: 'Salmão fresco, arroz temperado e alga crocante.', image: '../imgs/imagem1.avif' },
-        { id: 'yakisoba', name: 'Yakisoba', category: 'Prato quente', description: 'Macarrão salteado com legumes frescos e molho da casa.', image: '../imgs/imagem2.webp' },
-        { id: 'hot-roll', name: 'Hot Roll', category: 'Sushi', description: 'Sushi empanado e crocante, servido com molho especial.', image: '../imgs/imagem3.jpg' },
-        { id: 'petit-gateau', name: 'Petit Gâteau', category: 'Sobremesa', description: 'Bolo de chocolate com recheio cremoso e sorvete.', image: '../imgs/qualidade boa.webp' }
+        { id: 'combo-sushi', name: 'Combo Sushi Especial', category: 'Sushi', description: 'Seleção do chef com sushis frescos e peças especiais.', image: '/static/imgs/imagemtelainicial.png' },
+        { id: 'temaki-salmao', name: 'Temaki de Salmão', category: 'Sushi', description: 'Salmão fresco, arroz temperado e alga crocante.', image: '/static/imgs/imagem1.avif' },
+        { id: 'yakisoba', name: 'Yakisoba', category: 'Prato quente', description: 'Macarrão salteado com legumes frescos e molho da casa.', image: '/static/imgs/imagem2.webp' },
+        { id: 'hot-roll', name: 'Hot Roll', category: 'Sushi', description: 'Sushi empanado e crocante, servido com molho especial.', image: '/static/imgs/imagem3.jpg' },
+        { id: 'petit-gateau', name: 'Petit Gâteau', category: 'Sobremesa', description: 'Bolo de chocolate com recheio cremoso e sorvete.', image: '/static/imgs/qualidade boa.webp' }
     ];
 
     const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -32,6 +32,29 @@
         } catch (_) {
             return false;
         }
+    }
+
+    function getCsrfToken() {
+        const token = document.cookie
+            .split('; ')
+            .find((cookie) => cookie.startsWith('csrftoken='));
+        return token ? decodeURIComponent(token.slice('csrftoken='.length)) : '';
+    }
+
+    async function submitEvaluation(evaluation) {
+        const response = await fetch('/api/avaliacoes/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: JSON.stringify(evaluation)
+        });
+        const result = await response.json();
+        if (!response.ok) {
+            throw new Error(result.error || 'Não foi possível enviar sua avaliação.');
+        }
+        return result;
     }
 
     function setStatus(element, message, isError = false) {
@@ -136,14 +159,7 @@
         reviewButton.dataset.action = 'review';
         reviewButton.dataset.id = dish.id;
         reviewButton.textContent = 'Avaliar este prato';
-        const deleteButton = document.createElement('button');
-        deleteButton.type = 'button';
-        deleteButton.className = 'button-danger';
-        deleteButton.dataset.action = 'delete';
-        deleteButton.dataset.id = dish.id;
-        deleteButton.setAttribute('aria-label', `Excluir ${dish.name}`);
-        deleteButton.textContent = 'Excluir';
-        actions.append(reviewButton, deleteButton);
+        actions.append(reviewButton);
         content.append(category, title, description, actions);
         card.append(content);
         return card;
@@ -166,8 +182,6 @@
         const reviewStatus = document.getElementById('dish-review-status');
         const reviewedDishId = document.getElementById('reviewed-dish-id');
         const selectedDishName = document.getElementById('selected-dish-name');
-        const registrationForm = document.getElementById('dish-registration-form');
-        const registrationStatus = document.getElementById('dish-registration-status');
         let dishes = getStoredArray(DISHES_KEY, initialDishes);
 
         const render = () => {
@@ -176,12 +190,18 @@
             if (!dishes.length) {
                 const empty = document.createElement('p');
                 empty.className = 'empty-state';
-                empty.textContent = 'Nenhum prato cadastrado ainda. Cadastre o primeiro prato abaixo.';
+                empty.textContent = 'Nenhum prato cadastrado ainda. Cadastre pratos pelo Dashboard.';
                 list.append(empty);
                 return;
             }
             dishes.forEach((dish) => list.append(createDishCard(dish)));
         };
+
+        window.addEventListener('storage', (event) => {
+            if (event.key !== DISHES_KEY) return;
+            dishes = getStoredArray(DISHES_KEY, initialDishes);
+            render();
+        });
 
         const closeReview = () => {
             reviewArea.hidden = true;
@@ -195,17 +215,6 @@
             if (!button) return;
             const dish = dishes.find((item) => item.id === button.dataset.id);
             if (!dish) return;
-            if (button.dataset.action === 'delete') {
-                if (!window.confirm(`Deseja excluir o prato “${dish.name}”?`)) return;
-                dishes = dishes.filter((item) => item.id !== dish.id);
-                if (!storeArray(DISHES_KEY, dishes)) {
-                    setStatus(registrationStatus, 'Não foi possível salvar a remoção no navegador.', true);
-                    dishes = getStoredArray(DISHES_KEY, initialDishes);
-                }
-                if (reviewedDishId.value === dish.id) closeReview();
-                render();
-                return;
-            }
             reviewedDishId.value = dish.id;
             selectedDishName.textContent = dish.name;
             reviewForm.reset();
@@ -219,7 +228,7 @@
         document.getElementById('close-dish-review').addEventListener('click', closeReview);
         document.getElementById('cancel-dish-review').addEventListener('click', closeReview);
 
-        reviewForm.addEventListener('submit', (event) => {
+        reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const rating = Number(reviewForm.elements.rating.value);
             if (!rating) {
@@ -227,25 +236,88 @@
                 reviewForm.querySelector('.star-button').focus();
                 return;
             }
-            const reviews = getStoredArray(REVIEWS_KEY);
-            reviews.push({ id: `review-${Date.now()}`, category: 'pratos', dishId: reviewedDishId.value, rating, comment: reviewForm.elements.comment.value.trim(), createdAt: new Date().toISOString() });
-            if (!storeArray(REVIEWS_KEY, reviews)) {
-                setStatus(reviewStatus, 'Não foi possível salvar sua avaliação neste navegador.', true);
+            const dish = dishes.find((item) => item.id === reviewedDishId.value);
+            try {
+                await submitEvaluation({
+                    category: 'pratos',
+                    dishId: reviewedDishId.value,
+                    dishName: dish ? dish.name : '',
+                    rating,
+                    comment: reviewForm.elements.comment.value.trim()
+                });
+            } catch (error) {
+                setStatus(reviewStatus, error.message, true);
                 return;
             }
+            const reviews = getStoredArray(REVIEWS_KEY);
+            reviews.push({ id: `review-${Date.now()}`, category: 'pratos', dishId: reviewedDishId.value, rating, comment: reviewForm.elements.comment.value.trim(), createdAt: new Date().toISOString() });
+            storeArray(REVIEWS_KEY, reviews);
             reviewForm.reset();
             clearRating(reviewForm);
             setStatus(reviewStatus, 'Obrigado! Sua avaliação foi enviada com sucesso.');
         });
 
-        registrationForm.addEventListener('submit', (event) => {
+        render();
+    }
+
+    function setupDishAdminPage() {
+        const form = document.getElementById('dish-registration-form');
+        const list = document.getElementById('dashboard-dish-list');
+        if (!form || !list) return;
+
+        const status = document.getElementById('dish-registration-status');
+        const count = document.getElementById('dashboard-dish-count');
+        const productCount = document.getElementById('dashboard-product-count');
+        let dishes = getStoredArray(DISHES_KEY, initialDishes);
+
+        const render = () => {
+            list.replaceChildren();
+            count.textContent = `${dishes.length} ${dishes.length === 1 ? 'prato' : 'pratos'}`;
+            if (productCount) productCount.textContent = String(dishes.length);
+            if (!dishes.length) {
+                const empty = document.createElement('p');
+                empty.className = 'dashboard-dish-empty';
+                empty.textContent = 'Nenhum prato cadastrado.';
+                list.append(empty);
+                return;
+            }
+            dishes.forEach((dish) => {
+                const item = document.createElement('article');
+                item.className = 'dashboard-dish-item';
+                const image = dish.image ? document.createElement('img') : null;
+                if (image) {
+                    image.src = dish.image;
+                    image.alt = '';
+                    image.loading = 'lazy';
+                    image.addEventListener('error', () => image.remove(), { once: true });
+                    item.append(image);
+                }
+                const details = document.createElement('div');
+                details.className = 'dashboard-dish-details';
+                const name = document.createElement('h4');
+                name.textContent = dish.name;
+                const meta = document.createElement('p');
+                meta.textContent = `${dish.category} · ${dish.description}`;
+                details.append(name, meta);
+                const remove = document.createElement('button');
+                remove.type = 'button';
+                remove.className = 'dashboard-dish-remove';
+                remove.dataset.id = dish.id;
+                remove.textContent = 'Excluir';
+                remove.setAttribute('aria-label', `Excluir ${dish.name}`);
+                item.append(details, remove);
+                list.append(item);
+            });
+        };
+
+        form.addEventListener('submit', (event) => {
             event.preventDefault();
-            const name = registrationForm.elements.name.value.trim();
-            const description = registrationForm.elements.description.value.trim();
-            const imageUrl = registrationForm.elements.imageUrl.value.trim();
-            const file = registrationForm.elements.imageFile.files[0];
+            const name = form.elements.name.value.trim();
+            const description = form.elements.description.value.trim();
+            const imageUrl = form.elements.imageUrl.value.trim();
+            const file = form.elements.imageFile.files[0];
             if (!name || !description) {
-                setStatus(registrationStatus, 'Preencha o nome e a descrição do prato.', true);
+                setStatus(status, 'Preencha o nome e a descrição do prato.', true);
                 return;
             }
             if (imageUrl) {
@@ -253,24 +325,24 @@
                     const url = new URL(imageUrl);
                     if (!['http:', 'https:'].includes(url.protocol)) throw new Error();
                 } catch (_) {
-                    setStatus(registrationStatus, 'Informe uma URL de imagem válida, iniciando com http:// ou https://.', true);
+                    setStatus(status, 'Informe uma URL de imagem válida, iniciando com http:// ou https://.', true);
                     return;
                 }
             }
             if (file && (!file.type.startsWith('image/') || file.size > MAX_IMAGE_SIZE)) {
-                setStatus(registrationStatus, 'Envie uma imagem de até 1,5 MB.', true);
+                setStatus(status, 'Envie uma imagem de até 1,5 MB.', true);
                 return;
             }
             const saveDish = (image = imageUrl) => {
-                const dish = { id: `dish-${Date.now()}-${Math.random().toString(16).slice(2)}`, name, description, category: registrationForm.elements.category.value, image };
+                const dish = { id: `dish-${Date.now()}-${Math.random().toString(16).slice(2)}`, name, description, category: form.elements.category.value, image };
                 const nextDishes = [...dishes, dish];
                 if (!storeArray(DISHES_KEY, nextDishes)) {
-                    setStatus(registrationStatus, 'Não foi possível salvar o prato. Tente uma imagem menor.', true);
+                    setStatus(status, 'Não foi possível salvar o prato. Tente uma imagem menor.', true);
                     return;
                 }
                 dishes = nextDishes;
-                registrationForm.reset();
-                setStatus(registrationStatus, `“${dish.name}” foi cadastrado e já está disponível para avaliação.`);
+                form.reset();
+                setStatus(status, `“${dish.name}” foi cadastrado e já está disponível para avaliação.`);
                 render();
             };
             if (!file) {
@@ -279,8 +351,23 @@
             }
             const reader = new FileReader();
             reader.addEventListener('load', () => saveDish(String(reader.result)));
-            reader.addEventListener('error', () => setStatus(registrationStatus, 'Não foi possível ler a imagem selecionada.', true));
+            reader.addEventListener('error', () => setStatus(status, 'Não foi possível ler a imagem selecionada.', true));
             reader.readAsDataURL(file);
+        });
+
+        list.addEventListener('click', (event) => {
+            const button = event.target.closest('.dashboard-dish-remove');
+            if (!button) return;
+            const dish = dishes.find((item) => item.id === button.dataset.id);
+            if (!dish || !window.confirm(`Deseja excluir o prato “${dish.name}”?`)) return;
+            const nextDishes = dishes.filter((item) => item.id !== dish.id);
+            if (!storeArray(DISHES_KEY, nextDishes)) {
+                setStatus(status, 'Não foi possível salvar a remoção neste navegador.', true);
+                return;
+            }
+            dishes = nextDishes;
+            setStatus(status, `“${dish.name}” foi removido do cardápio.`);
+            render();
         });
 
         render();
@@ -292,7 +379,7 @@
         const status = document.getElementById('experience-review-status');
         const category = document.body.dataset.category;
         const categoryLabel = document.body.dataset.categoryLabel || category;
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
             const rating = Number(form.elements.rating.value);
             if (!rating) {
@@ -300,12 +387,16 @@
                 form.querySelector('.star-button').focus();
                 return;
             }
-            const reviews = getStoredArray(REVIEWS_KEY);
-            reviews.push({ id: `review-${Date.now()}`, category, rating, comment: form.elements.comment.value.trim(), createdAt: new Date().toISOString() });
-            if (!storeArray(REVIEWS_KEY, reviews)) {
-                setStatus(status, 'Não foi possível salvar sua avaliação neste navegador.', true);
+            const comment = form.elements.comment.value.trim();
+            try {
+                await submitEvaluation({ category, rating, comment });
+            } catch (error) {
+                setStatus(status, error.message, true);
                 return;
             }
+            const reviews = getStoredArray(REVIEWS_KEY);
+            reviews.push({ id: `review-${Date.now()}`, category, rating, comment, createdAt: new Date().toISOString() });
+            storeArray(REVIEWS_KEY, reviews);
             form.reset();
             clearRating(form);
             setStatus(status, `Obrigado! Sua avaliação de ${categoryLabel} foi enviada com sucesso.`);
@@ -316,6 +407,7 @@
         setupNavigation();
         setupRatingGroups();
         setupDishPage();
+        setupDishAdminPage();
         setupExperiencePage();
     });
 })();

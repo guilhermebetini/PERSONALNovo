@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpiniAki | Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css?v=4">
 </head>
 <body>
     <script>
@@ -26,7 +26,7 @@
         <nav class="menu" id="menu-principal" aria-label="Navegacao principal">
             <a class="is-active" href="dashboard.html">Home</a>
             <a href="index.guilherme.html">Ambiente</a>
-            <a href="avaliacao.html">Avaliações</a>
+            <a href="dashboard-avaliacoes.html">Avaliações</a>
             <a href="contato.html">Contato</a>
         </nav>
 
@@ -45,21 +45,13 @@
                     <span class="material-symbols-outlined">dashboard</span>
                     <span>Dashboard</span>
                 </a>
-                <a href="dashboard.html" class="nav-item">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span>Dashboard</span>
-                </a>
-                <a href="avaliacao.html" class="nav-item">
+                <a href="dashboard-avaliacoes.html" class="nav-item">
                     <span class="material-symbols-outlined">group</span>
                     <span>Avaliações</span>
                 </a>
-                <a href="cadastrar.html" class="nav-item">
+                <a href="#cadastrar-pratos" class="nav-item">
                     <span class="material-symbols-outlined">restaurant</span>
                     <span>Cadastrar Pratos</span>
-                </a>
-                <a href="produtos.html" class="nav-item">
-                    <span class="material-symbols-outlined">settings</span>
-                    <span>Produtos</span>
                 </a>
             </nav>
         </aside>
@@ -71,15 +63,65 @@
                 <h1>Dashboard</h1>
             </div>
 
+            <section class="dashboard-card dish-management" id="cadastrar-pratos" aria-labelledby="dish-management-title">
+                <div class="dish-management-heading">
+                    <div>
+                        <span class="dish-management-kicker">CARDÁPIO</span>
+                        <h2 id="dish-management-title">Gerenciar pratos</h2>
+                        <p>Cadastre os pratos que ficarão disponíveis para avaliação.</p>
+                    </div>
+                    <span class="material-symbols-outlined" aria-hidden="true">restaurant_menu</span>
+                </div>
+                <form class="dish-admin-form" id="dish-registration-form" novalidate>
+                    <div class="dish-admin-field">
+                        <label for="dish-name">Nome do prato</label>
+                        <input id="dish-name" name="name" type="text" maxlength="80" required>
+                    </div>
+                    <div class="dish-admin-field">
+                        <label for="dish-category">Categoria</label>
+                        <select id="dish-category" name="category">
+                            <option value="Sushi">Sushi</option>
+                            <option value="Entrada">Entrada</option>
+                            <option value="Prato quente">Prato quente</option>
+                            <option value="Sobremesa">Sobremesa</option>
+                            <option value="Bebida">Bebida</option>
+                        </select>
+                    </div>
+                    <div class="dish-admin-field dish-admin-field--wide">
+                        <label for="dish-description">Descrição</label>
+                        <textarea id="dish-description" name="description" maxlength="250" required placeholder="Descreva ingredientes, sabores ou características do prato."></textarea>
+                    </div>
+                    <div class="dish-admin-field">
+                        <label for="dish-image-url">URL da imagem <span>(opcional)</span></label>
+                        <input id="dish-image-url" name="imageUrl" type="url" placeholder="https://exemplo.com/imagem.jpg">
+                    </div>
+                    <div class="dish-admin-field">
+                        <label for="dish-image-file">Enviar imagem <span>(até 1,5 MB)</span></label>
+                        <input id="dish-image-file" name="imageFile" type="file" accept="image/*">
+                    </div>
+                    <div class="dish-admin-actions">
+                        <button class="dish-admin-submit" type="submit">Cadastrar prato</button>
+                        <p class="dish-admin-status" id="dish-registration-status" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+                <div class="dish-admin-catalog">
+                    <div class="dish-admin-catalog-heading">
+                        <h3>Pratos cadastrados</h3>
+                        <span id="dashboard-dish-count" aria-live="polite"></span>
+                    </div>
+                    <div class="dashboard-dish-list" id="dashboard-dish-list"></div>
+                </div>
+            </section>
+
             <!-- Cards Estatisticas -->
             <div class="stats-grid">
                 <div class="stat-card stat-red">
                     <div class="stat-info">
-                        <h2>50</h2>
-                        <p>Novas Avaliações</p>
+                        <h2 id="evaluation-service-count">0</h2>
+                        <p>Avaliações de Atendimento</p>
                         <div class="stat-footer">
-                            <span>Ticket Medio 333,00</span>
-                            <span class="negative">- 30,020%</span>
+                            <span>Total recebido</span>
+                            <span></span>
                         </div>
                     </div>
                     <span class="stat-icon">
@@ -89,11 +131,11 @@
 
                 <div class="stat-card stat-orange">
                     <div class="stat-info">
-                        <h2>23</h2>
-                        <p>Avaliações Lidas</p>
+                        <h2 id="evaluation-dishes-count">0</h2>
+                        <p>Avaliações de Pratos</p>
                         <div class="stat-footer">
-                            <span>Ticket Medio 33570</span>
-                            <span class="negative">- 43,8%</span>
+                            <span>Total recebido</span>
+                            <span></span>
                         </div>
                     </div>
                     <span class="stat-icon">
@@ -103,11 +145,11 @@
 
                 <div class="stat-card stat-green">
                     <div class="stat-info">
-                        <h2>42</h2>
-                        <p>Avaliações Respondidas</p>
+                        <h2 id="evaluation-establishment-count">0</h2>
+                        <p>Avaliações do Estabelecimento</p>
                         <div class="stat-footer">
-                            <span>Ticket Medio 326,09</span>
-                            <span class="negative">- 44,8%</span>
+                            <span>Total recebido</span>
+                            <span></span>
                         </div>
                     </div>
                     <span class="stat-icon">
@@ -117,7 +159,7 @@
 
                 <div class="stat-card stat-yellow">
                     <div class="stat-info">
-                        <h2>16</h2>
+                        <h2 id="dashboard-product-count">16</h2>
                         <p>Produtos Cadastrados</p>
                         <div class="stat-footer">
                             <span>Produtos</span>
@@ -129,6 +171,7 @@
                     </span>
                 </div>
             </div>
+            <p class="dashboard-live-status" id="evaluation-live-status" role="status" aria-live="polite">Carregando avaliações...</p>
 
             <!-- Grid Principal -->
             <div class="dashboard-grid">
@@ -349,24 +392,28 @@
                         </div>
                     </div>
 
-                    <button class="view-all-btn">
+                    <a class="view-all-btn" href="dashboard-avaliacoes.html">
                         <span class="material-symbols-outlined">visibility</span>
                         Ver todas avaliações
-                    </button>
+                    </a>
                 </div>
             </div>
         </main>
     </div>
 
+    <script src="/static/js/avaliacoes.js?v=5"></script>
+    <script src="/static/js/dashboard.js?v=1"></script>
     <script>
         const burger = document.querySelector('.burger');
         const menu = document.querySelector('.menu');
         const menuLinks = document.querySelectorAll('.menu a');
+        const sidebar = document.querySelector('.sidebar');
         const logoutBtn = document.getElementById('logout-btn');
 
         if (burger && menu) {
             const alternarMenu = (aberto) => {
                 menu.classList.toggle('is-open', aberto);
+                sidebar.classList.toggle('open', aberto);
                 burger.classList.toggle('is-open', aberto);
                 burger.setAttribute('aria-expanded', String(aberto));
                 burger.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
@@ -377,6 +424,12 @@
             });
 
             menuLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    alternarMenu(false);
+                });
+            });
+
+            sidebar.querySelectorAll('.nav-item').forEach((link) => {
                 link.addEventListener('click', () => {
                     alternarMenu(false);
                 });

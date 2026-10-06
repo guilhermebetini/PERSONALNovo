@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'config.apps.ConfigConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,4 +120,8 @@ STATICFILES_DIRS = [
     ('css', BASE_DIR / 'css'),
     ('imgs', BASE_DIR / 'imgs'),
     ('js', BASE_DIR / 'js'),
+]
+STATICFILES_FINDERS = [
+    'config.staticfiles.CrossPlatformFileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
