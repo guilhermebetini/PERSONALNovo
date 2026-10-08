@@ -150,7 +150,6 @@
     const burger = document.querySelector('.burger');
     const menu = document.querySelector('.menu');
     const sidebar = document.querySelector('.sidebar');
-    const logout = document.getElementById('logout-btn');
     if (burger && menu && sidebar) {
         burger.addEventListener('click', () => {
             const open = !sidebar.classList.contains('open');
@@ -161,10 +160,6 @@
             burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
         });
     }
-    if (logout) {
-        logout.addEventListener('click', () => sessionStorage.removeItem('adminAuth'));
-    }
-
     refreshReviews();
     window.setInterval(refreshReviews, 5000);
 })();

@@ -18,10 +18,10 @@
 
         <a href="index.guilherme.html" class="brand">Opini<span>Aki</span></a>
 
-        <div class="search">
-            <input type="text" placeholder="Buscar no site..." aria-label="Buscar no site">
-            <button type="button" aria-label="Buscar"></button>
-        </div>
+        <form class="search" action="/buscar/" method="get" role="search">
+            <input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required>
+            <button type="submit" aria-label="Buscar"></button>
+        </form>
         <nav class="menu" id="menu-principal">
             <a href="index.guilherme.html">Home</a>
             <a href="index.guilherme.html">Ambiente</a>
@@ -69,4 +69,3 @@
     </main>
 </body>
 </html>
-

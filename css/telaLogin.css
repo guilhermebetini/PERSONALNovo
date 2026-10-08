@@ -117,6 +117,54 @@ body.login-page {
     box-shadow: 0 20px 40px rgba(255, 34, 31, 0.2);
 }
 
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 0;
+    color: rgba(17, 17, 17, 0.7);
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.login-divider::before,
+.login-divider::after {
+    flex: 1;
+    height: 1px;
+    background: rgba(17, 17, 17, 0.2);
+    content: "";
+}
+
+.google-login-button {
+    display: flex;
+    width: 100%;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.2);
+    border-radius: 18px;
+    background: #fff;
+    color: #202124;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.google-login-button:hover,
+.google-login-button:focus-visible {
+    background: #f7f8f8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.google-login-mark {
+    color: #4285f4;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
 .login-note {
     margin-top: 24px;
     font-size: 15px;

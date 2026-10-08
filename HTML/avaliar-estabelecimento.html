@@ -10,7 +10,7 @@
 <body data-page="experience" data-category="estabelecimento" data-category-label="estabelecimento">
     <header class="topbar">
         <a href="paginaInicial.html" class="brand">Opini<span>Aki</span></a>
-        <div class="search"><input type="search" placeholder="Buscar no site..." aria-label="Buscar no site"><button type="button" aria-label="Buscar"></button></div>
+        <form class="search" action="/buscar/" method="get" role="search"><input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required><button type="submit" aria-label="Buscar"></button></form>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal"><a href="paginaInicial.html">Home</a><a href="paginaInicial.html">Ambiente</a><a href="avaliacao.html" class="is-active">Avaliações</a><a href="contato.html">Contato</a></nav>
         <a href="cadastrar.html" class="topbar-cta">Cadastrar-se</a><button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal"><span></span></button>
     </header>

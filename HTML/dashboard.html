@@ -8,19 +8,13 @@
     <link rel="stylesheet" href="/static/css/dashboard.css?v=4">
 </head>
 <body>
-    <script>
-        if (sessionStorage.getItem('adminAuth') !== '1') {
-            window.location.href = 'entrar.html';
-        }
-    </script>
-
     <!-- Sua Topbar Original -->
     <header class="topbar">
         <a class="brand" href="index.guilherme.html">Opini<span>Aki</span></a>
 
-        <form class="search" action="#" role="search">
+        <form class="search" action="/buscar/" method="get" role="search">
             <button type="submit" aria-label="Buscar"></button>
-            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
+            <input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required>
         </form>
 
         <nav class="menu" id="menu-principal" aria-label="Navegacao principal">
@@ -30,7 +24,10 @@
             <a href="contato.html">Contato</a>
         </nav>
 
-        <a class="topbar-cta" id="logout-btn" href="entrar.html" role="button">Sair</a>
+        <form class="logout-form" action="/sair/" method="post">
+            {% csrf_token %}
+            <button class="topbar-cta" type="submit">Sair</button>
+        </form>
 
         <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
             <span>Menu</span>
@@ -159,7 +156,7 @@
 
                 <div class="stat-card stat-yellow">
                     <div class="stat-info">
-                        <h2 id="dashboard-product-count">16</h2>
+                        <h2 id="dashboard-product-count">0</h2>
                         <p>Produtos Cadastrados</p>
                         <div class="stat-footer">
                             <span>Produtos</span>
@@ -180,28 +177,28 @@
                     <h3>Resumo das Avaliações</h3>
 
                     <div class="charts-container">
-                        <div class="chart-section">
+                        <div class="chart-section" data-chart-category="atendimento">
                             <h4>Avaliações do Atendimento</h4>
                             <div class="bar-chart">
-                                <div class="bar bar-full" style="height: 85%"></div>
-                                <div class="bar bar-full" style="height: 72%"></div>
-                                <div class="bar bar-light" style="height: 50%"></div>
-                                <div class="bar bar-light" style="height: 25%"></div>
-                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="bar bar-full" data-rating="1"></div>
+                                <div class="bar bar-full" data-rating="2"></div>
+                                <div class="bar bar-light" data-rating="3"></div>
+                                <div class="bar bar-light" data-rating="4"></div>
+                                <div class="bar bar-light" data-rating="5"></div>
                                 <div class="chart-labels">
                                     <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="chart-section">
+                        <div class="chart-section" data-chart-category="estabelecimento">
                             <h4>Avaliações do Estabelecimento</h4>
                             <div class="bar-chart">
-                                <div class="bar bar-full" style="height: 85%"></div>
-                                <div class="bar bar-full" style="height: 72%"></div>
-                                <div class="bar bar-light" style="height: 50%"></div>
-                                <div class="bar bar-light" style="height: 25%"></div>
-                                <div class="bar bar-light" style="height: 25%"></div>
+                                <div class="bar bar-full" data-rating="1"></div>
+                                <div class="bar bar-full" data-rating="2"></div>
+                                <div class="bar bar-light" data-rating="3"></div>
+                                <div class="bar bar-light" data-rating="4"></div>
+                                <div class="bar bar-light" data-rating="5"></div>
                                 <div class="chart-labels">
                                     <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                                 </div>
@@ -217,45 +214,52 @@
                     <div class="rating-container">
                         <div class="rating-circle">
                             <div class="circle-inner">
-                                <span class="rating-value">4,7</span>
+                                <span class="rating-value" id="dashboard-average-rating">—</span>
                                 <div class="rating-stars">
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
+                                    <span class="material-symbols-outlined" data-average-star="1">star</span>
+                                    <span class="material-symbols-outlined" data-average-star="2">star</span>
+                                    <span class="material-symbols-outlined" data-average-star="3">star</span>
+                                    <span class="material-symbols-outlined" data-average-star="4">star</span>
+                                    <span class="material-symbols-outlined" data-average-star="5">star</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="rating-info">
                             <div class="rating-summary">
-                                <span>4 & 1s</span>
-                                <div class="mini-stars">
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
-                                    <span class="material-symbols-outlined filled">star</span>
-                                </div>
+                                <span id="dashboard-total-ratings">0 avaliações</span>
                             </div>
 
                             <div class="rating-breakdown">
                                 <div class="breakdown-item">
                                     <span class="dot green"></span>
-                                    <span>App</span>
-                                    <span class="material-symbols-outlined">reviews</span>
-                                    <span>354</span>
+                                    <span>5 estrelas</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                    <span data-rating-count="5">0</span>
                                 </div>
                                 <div class="breakdown-item">
                                     <span class="dot red"></span>
-                                    <span>Sittets</span>
-                                    <span class="material-symbols-outlined">reviews</span>
-                                    <span>276</span>
+                                    <span>4 estrelas</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                    <span data-rating-count="4">0</span>
                                 </div>
                                 <div class="breakdown-item">
                                     <span class="dot black"></span>
-                                    <span>Outros</span>
-                                    <span class="material-symbols-outlined">reviews</span>
-                                    <span>100</span>
+                                    <span>3 estrelas</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                    <span data-rating-count="3">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="dot red"></span>
+                                    <span>2 estrelas</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                    <span data-rating-count="2">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="dot black"></span>
+                                    <span>1 estrela</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                    <span data-rating-count="1">0</span>
                                 </div>
                             </div>
                         </div>
@@ -267,74 +271,8 @@
                     <h3>Produtos Mais Avaliados</h3>
 
                      <!-- foto da comida-->
-                    <div class="product-list">
-                        <div class="product-item">
-                            <div class="product-img"></div>
-                            <div class="product-info">
-                                <h4>Comida japa</h4>
-                                <small>Diálogo do: 993.4.084</small>
-                            </div>
-                            <span class="product-count">84</span>
-                            <div class="product-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="product-rating">4.8</span>
-                        </div>
-
-                        <div class="product-item">
-                            <div class="product-img"></div>
-                            <div class="product-info">
-                                <h4>Japa</h4>
-                                <small>Diálogo do: 093.4.094</small>
-                            </div>
-                            <span class="product-count">67</span>
-                            <div class="product-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="product-rating">4.7</span>
-                        </div>
-
-                        <div class="product-item">
-                            <div class="product-img"></div>
-                            <div class="product-info">
-                                <h4>japa</h4>
-                                <small>Diálogo do: 093.4.002</small>
-                            </div>
-                            <span class="product-count">45</span>
-                            <div class="product-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="product-rating">4.6</span>
-                        </div>
-
-                        <div class="product-item">
-                            <div class="product-img"></div>
-                            <div class="product-info">
-                                <h4>Japa</h4>
-                                <small>Diálogo do: 993.4.004</small>
-                            </div>
-                            <span class="product-count">39</span>
-                            <div class="product-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="product-rating">4.5</span>
-                        </div>
+                    <div class="product-list" id="top-dishes-dashboard-list">
+                        <p class="dashboard-list-empty">Ainda não há avaliações de pratos.</p>
                     </div>
                 </div>
 
@@ -342,54 +280,8 @@
                 <div class="dashboard-card">
                     <h3>Últimas Avaliações</h3>
 
-                    <div class="reviews-list">
-                        <div class="review-item">
-                            <div class="review-avatar">👨🏻</div>
-                            <div class="review-info">
-                                <h4>João Pedro</h4>
-                                <p>Hamburguer Especial</p>
-                            </div>
-                            <div class="review-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="review-time">15 min</span>
-                        </div>
-
-                        <div class="review-item">
-                            <div class="review-avatar">👩🏻</div>
-                            <div class="review-info">
-                                <h4>Ana Clara</h4>
-                                <p>Pizza de Peperoni</p>
-                            </div>
-                            <div class="review-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                            </div>
-                            <span class="review-time">30 min</span>
-                        </div>
-
-                        <div class="review-item">
-                            <div class="review-avatar">👨🏻</div>
-                            <div class="review-info">
-                                <h4>Ricardo Lima</h4>
-                                <p>Salada Caesar</p>
-                            </div>
-                            <div class="review-stars">
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined filled">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                            </div>
-                            <span class="review-time">1 h</span>
-                        </div>
+                    <div class="reviews-list" id="latest-reviews-list">
+                        <p class="dashboard-list-empty">Ainda não há avaliações registradas.</p>
                     </div>
 
                     <a class="view-all-btn" href="dashboard-avaliacoes.html">
@@ -408,7 +300,6 @@
         const menu = document.querySelector('.menu');
         const menuLinks = document.querySelectorAll('.menu a');
         const sidebar = document.querySelector('.sidebar');
-        const logoutBtn = document.getElementById('logout-btn');
 
         if (burger && menu) {
             const alternarMenu = (aberto) => {
@@ -433,12 +324,6 @@
                 link.addEventListener('click', () => {
                     alternarMenu(false);
                 });
-            });
-        }
-
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function () {
-                sessionStorage.removeItem('adminAuth');
             });
         }
     </script>

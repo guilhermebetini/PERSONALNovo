@@ -17,11 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import evaluations_api, pagina
+from .views import (
+    evaluations_api,
+    google_login,
+    login_view,
+    logout_view,
+    pagina,
+    register_view,
+    search,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/avaliacoes/', evaluations_api, name='avaliacoes-api'),
+    path('buscar/', search, name='buscar'),
     path('', pagina('paginaInicial.html'), name='inicio'),
     path('paginaInicial.html', pagina('paginaInicial.html'), name='pagina-inicial'),
     path('index.guilherme.html', pagina('paginaInicial.html'), name='index-legado'),
@@ -31,10 +40,14 @@ urlpatterns = [
     path('avaliar-estabelecimento.html', pagina('avaliar-estabelecimento.html'), name='avaliar-estabelecimento'),
     path('avaliçao.html', pagina('avaliacao.html'), name='avaliacao-legado'),
     path('contato.html', pagina('contato.html'), name='contato'),
-    path('cadastrar.html', pagina('cadastrar.html'), name='cadastrar'),
-    path('entrar.html', pagina('entrar.html'), name='entrar'),
+    path('cadastrar/', register_view, name='cadastrar'),
+    path('cadastrar.html', register_view, name='cadastrar-legacy'),
+    path('entrar/', login_view, name='entrar'),
+    path('entrar.html', login_view, name='entrar-legacy'),
+    path('auth/google/', google_login, name='google-login'),
+    path('sair/', logout_view, name='sair'),
     path('serviço.html', pagina('serviço.html'), name='servico'),
-    path('dashboard.html', pagina('dashboard.html'), name='dashboard'),
-    path('dashboard-avaliacoes.html', pagina('dashboard-avaliacoes.html'), name='dashboard-avaliacoes'),
+    path('dashboard.html', pagina('dashboard.html', proteger=True), name='dashboard'),
+    path('dashboard-avaliacoes.html', pagina('dashboard-avaliacoes.html', proteger=True), name='dashboard-avaliacoes'),
     path('produtos.html', pagina('serviço.html'), name='produtos'),
 ]

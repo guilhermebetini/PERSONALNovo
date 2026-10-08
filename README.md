@@ -1,185 +1,64 @@
-# OpiniAki — Sistema de Avaliações do Restaurante Oishi
+# OpiniAki
 
-Projeto Django desenvolvido para o restaurante japonês **Oishi**. O sistema permite aos clientes criar conta, fazer login, visualizar o cardápio, avaliar pratos e comentar sobre o atendimento e o ambiente do restaurante.
+Site Django de avaliações do restaurante Sabor Cacoal. Clientes podem pesquisar
+o conteúdo do site, avaliar pratos, atendimento e estabelecimento, e criar
+contas para acessar o painel.
 
-Como o sistema é voltado para um único restaurante (e não uma plataforma multi-restaurante), o app `restaurantes` foi ajustado para representar as informações fixas do **Oishi** (endereço, horário de funcionamento, fotos do ambiente) em vez de um cadastro genérico de vários estabelecimentos.
+## Executar no Windows
 
-## Integrantes e Responsabilidades
+Na pasta do projeto, execute `run.bat`. O script cria o ambiente virtual,
+instala as dependências, aplica as migrações e inicia o servidor em
+http://127.0.0.1:8000/.
 
-| Integrante   | App | Responsabilidade Principal |
-|--------------|---|---|
-| Guilherme    | `contas` | Autenticação e gerenciamento de usuários |
-| Lucivânia    | `restaurantes` | Cadastro de restaurante e pratos |
-| Emanuele     | `pratos_avaliacoes` | Avaliações e comentários sobre pratos |
-| Luiz Gustavo | `experiencia` | Avaliações sobre atendimento e ambiente |
+Também é possível iniciar manualmente:
 
----
-
-## Estrutura do Projeto
-
-```
-projeto_avaliacoes/
-├── contas/
-├── restaurantes/
-├── pratos_avaliacoes/
-├── experiencia/
-├── core/          # templates base, home, arquivos estáticos compartilhados
-├── templates/
-├── static/
-├── media/
-└── projeto_avaliacoes/  # settings, urls raiz
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py runserver
 ```
 
----
+Se a porta 8000 já estiver ocupada, use `run.bat 8001` e abra
+http://127.0.0.1:8001/. Para encerrar o servidor, pressione `Ctrl+C` no
+terminal.
 
-## App 1: `contas`
+## Funcionalidades
 
-**Finalidade:** Cadastro, login, logout e gerenciamento de perfil de usuário.
+- Busca por páginas e avaliações; a busca ignora diferenças entre letras
+  maiúsculas e minúsculas e acentos.
+- Cadastro e login com usuários armazenados no banco de dados Django.
+- Painéis protegidos por sessão, com opção de sair.
+- Envio de avaliações com nota e comentário; avaliações ficam no SQLite e
+  alimentam os contadores, gráficos e listas dos painéis.
+- Cadastro de pratos no painel. A lista de pratos é armazenada no navegador
+  atual; avaliações e contas são armazenadas no banco de dados.
 
-**Integrante responsável:** Guilherme
+Não há uma conta administrativa padrão. Crie uma conta pela opção
+**Cadastrar-se** e use-a para entrar no painel.
 
-### Models
-- `Usuario` (ou `Profile` com `OneToOneField` para `User`) — foto, bio, data de cadastro
+### Login com Google
 
-### Views
-- `CadastroView`
-- `LoginView`
-- `LogoutView`
-- `PerfilView`
-- `EditarPerfilView`
+O login utiliza o botão oficial do Google Identity Services e o Client ID
+configurado no Django. Não precisa de Client Secret. No Google Cloud, adicione
+à lista de origens JavaScript autorizadas a origem usada para abrir o site,
+como `http://127.0.0.1:8000` (ou `http://localhost:8000`). O Django valida
+assinatura, público e validade da credencial Google antes de criar ou autenticar
+uma conta.
 
-### Arquivos criados/modificados
-- `contas/models.py`
-- `contas/views.py`
-- `contas/forms.py`
-- `contas/urls.py`
-- `templates/contas/cadastro.html`
-- `templates/contas/login.html`
-- `templates/contas/perfil.html`
-- `projeto_avaliacoes/settings.py` (configuração de `AUTH_USER_MODEL`, se aplicável)
+## Verificações
 
-### Responsabilidades específicas
-- [ ] Decidir e configurar o modelo de usuário (`AUTH_USER_MODEL` ou `Profile`) **antes da primeira migration**
-- [ ] Criar formulários de cadastro e login com validação
-- [ ] Implementar proteção de rotas com `@login_required`
-- [ ] Criar página de perfil do usuário
+```powershell
+.\.venv\Scripts\python.exe manage.py check
+.\.venv\Scripts\python.exe manage.py test config
+```
 
----
+## Estrutura principal
 
-## App 2: `restaurantes`
+- `config/`: configurações Django, rotas, API, autenticação, busca e testes.
+- `HTML/`: páginas e templates.
+- `css/`, `js/` e `imgs/`: estilos, scripts e imagens servidos pelo Django.
+- `db.sqlite3`: banco de dados local de desenvolvimento.
 
-**Finalidade:** Gerenciar as informações do restaurante Oishi (endereço, horário, fotos do ambiente) e o cadastro dos pratos do cardápio.
-
-**Integrante responsável:** Lucivânia
-
-> Como o sistema atende apenas ao Oishi, o model `Restaurante` pode ser único (registro fixo/singleton) ou simplesmente omitido, guardando os dados do restaurante direto no `settings.py` ou em uma página estática — a decisão fica a critério do grupo. Abaixo considera-se a versão com model, para manter flexibilidade caso o Oishi abra outra unidade no futuro.
-
-### Models
-- `Restaurante` — nome ("Oishi"), endereço, horário de funcionamento, telefone, foto do ambiente, descrição
-- `Prato` — `ForeignKey(Restaurante)`, nome, descrição, preço, foto, categoria (ex: sushi, temaki, yakisoba, sobremesa, bebida)
-
-### Views
-- `HomeOishiView` (página inicial com dados do restaurante)
-- `ListaPratosView` (cardápio, com filtro por categoria)
-- `DetalhePratoView`
-- `CadastrarPratoView`
-- `EditarPratoView`
-
-### Arquivos criados/modificados
-- `restaurantes/models.py`
-- `restaurantes/views.py`
-- `restaurantes/forms.py`
-- `restaurantes/urls.py`
-- `templates/restaurantes/home.html`
-- `templates/restaurantes/cardapio.html`
-- `templates/restaurantes/detalhe_prato.html`
-- `templates/restaurantes/form_prato.html`
-- `projeto_avaliacoes/settings.py` (`MEDIA_ROOT`, `MEDIA_URL`)
-
-### Responsabilidades específicas
-- [ ] Cadastrar as informações fixas do Oishi (via fixture, migration de dados ou admin)
-- [ ] Modelar relacionamento Restaurante → Prato (1:N)
-- [ ] Configurar upload de imagens dos pratos e do ambiente
-- [ ] Implementar filtro do cardápio por categoria (ex: sushi, temaki, yakisoba)
-
----
-
-## App 3: `pratos_avaliacoes`
-
-**Finalidade:** Avaliações e comentários dos usuários sobre os pratos.
-
-**Integrante responsável:** Emanuele
-
-### Models
-- `AvaliacaoPrato` — `ForeignKey(Usuario)`, `ForeignKey(Prato)`, nota (1-5), comentário, data
-- `RespostaComentario` *(opcional)*
-
-### Views
-- `CriarAvaliacaoPratoView`
-- `ListaAvaliacoesPratoView`
-- `EditarAvaliacaoView`
-- `ExcluirAvaliacaoView`
-
-### Arquivos criados/modificados
-- `pratos_avaliacoes/models.py`
-- `pratos_avaliacoes/views.py`
-- `pratos_avaliacoes/forms.py`
-- `pratos_avaliacoes/urls.py`
-- `templates/pratos_avaliacoes/form_avaliacao.html`
-- `templates/pratos_avaliacoes/lista.html`
-
-### Responsabilidades específicas
-- [ ] Garantir que um usuário avalie o mesmo prato apenas uma vez (`unique_together`)
-- [ ] Calcular média de notas por prato (`aggregate`/`annotate`)
-- [ ] Permitir editar/excluir avaliação apenas pelo autor
-
----
-
-## App 4: `experiencia`
-
-**Finalidade:** Avaliações sobre atendimento e ambiente do restaurante.
-
-**Integrante responsável:** Luiz Gustavo
-
-### Models
-- `AvaliacaoExperiencia` — `ForeignKey(Usuario)`, `ForeignKey(Restaurante)`, nota atendimento, nota ambiente, comentário, data
-
-### Views
-- `CriarAvaliacaoExperienciaView`
-- `ListaAvaliacoesExperienciaView`
-- `EditarAvaliacaoExperienciaView`
-- `ExcluirAvaliacaoExperienciaView`
-
-### Arquivos criados/modificados
-- `experiencia/models.py`
-- `experiencia/views.py`
-- `experiencia/forms.py`
-- `experiencia/urls.py`
-- `templates/experiencia/form_avaliacao.html`
-- `templates/experiencia/lista.html`
-
-### Responsabilidades específicas
-- [ ] Definir critérios de nota (ex: 1-5 estrelas para atendimento e ambiente)
-- [ ] Exibir médias agregadas na página do restaurante
-- [ ] Implementar paginação/ordenação cronológica dos comentários
-
----
-
-## Decisões a alinhar antes de iniciar o desenvolvimento
-
-- [ ] **Modelo de usuário:** `User` padrão + `Profile` OU `AUTH_USER_MODEL` customizado (afeta todos os apps)
-- [ ] **Namespaces de URL:** cada app deve definir `app_name` em seu `urls.py`
-- [ ] **Template base compartilhado:** `base.html` no app `core` com navbar/footer comuns
-- [ ] **Fluxo de Git:** branches por app/feature, convenção de commits e revisão de merge
-
----
-
-## Tecnologias
-
-- Python / Django
-- SQLite (desenvolvimento) — *definir banco de produção, se aplicável*
-- PyCharm
-- Git / GitHub
-
----
-
+O servidor de desenvolvimento e as configurações atuais são apenas para uso
+local; antes de publicar o site, configure os parâmetros de produção do Django.

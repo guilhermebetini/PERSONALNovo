@@ -26,6 +26,10 @@ SECRET_KEY = 'django-insecure-q=js+cf+st!s4^_#8o_++y(c!)26wq(tr))6=alx-np2n2gu$n
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+LOGIN_URL = '/entrar/'
+GOOGLE_OAUTH_CLIENT_ID = (
+    '953718056226-pqkq5cpoalb2gkocjenigngm33hu3nte.apps.googleusercontent.com'
+)
 
 
 # Application definition

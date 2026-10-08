@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquise páginas, serviços e avaliações no OpiniAki.">
+    <title>Buscar | OpiniAki</title>
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/busca.css">
+</head>
+<body class="search-results-page">
+    <header class="topbar">
+        <a href="/" class="brand">Opini<span>Aki</span></a>
+        <form class="search" action="/buscar/" method="get" role="search">
+            <input type="search" name="q" value="{{ query }}" placeholder="Buscar no site..." aria-label="Buscar no site" required>
+            <button type="submit" aria-label="Buscar"></button>
+        </form>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal">
+            <a href="/">Home</a>
+            <a href="/avaliacao.html">Avaliações</a>
+            <a href="/contato.html">Contato</a>
+        </nav>
+        <a href="/cadastrar.html" class="topbar-cta">Cadastrar-se</a>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+            <span></span>
+        </button>
+    </header>
+
+    <main class="search-results">
+        <p class="search-results-kicker">OPINIAKI · BUSCA</p>
+        <h1>Resultados da busca</h1>
+        {% if query %}
+            <p class="search-results-summary">Resultados para <strong>{{ query }}</strong>: {{ results|length }}</p>
+            {% if results %}
+                <ol class="search-results-list">
+                    {% for result in results %}
+                    <li class="search-result">
+                        <h2><a href="{{ result.url }}">{{ result.title }}</a></h2>
+                        <p>{{ result.excerpt }}</p>
+                    </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p class="search-results-empty">Nenhum resultado encontrado. Tente outras palavras.</p>
+            {% endif %}
+        {% else %}
+            <p class="search-results-empty">Digite uma palavra ou assunto na barra de busca.</p>
+        {% endif %}
+    </main>
+    <script>
+        const burger = document.querySelector('.burger');
+        const menu = document.getElementById('menu-principal');
+        burger.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('is-open');
+            burger.classList.toggle('is-open', isOpen);
+            burger.setAttribute('aria-expanded', String(isOpen));
+        });
+    </script>
+</body>
+</html>

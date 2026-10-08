@@ -15,10 +15,10 @@
     <header class="topbar">
         <a href="index.guilherme.html" class="brand">Opini<span>Aki</span></a>
 
-        <div class="search">
-            <input type="text" placeholder="Buscar no site..." aria-label="Buscar no site">
-            <button type="button" aria-label="Buscar"></button>
-        </div>
+        <form class="search" action="/buscar/" method="get" role="search">
+            <input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required>
+            <button type="submit" aria-label="Buscar"></button>
+        </form>
 
         <nav class="menu" id="menu-principal">
             <a href="index.guilherme.html">Home</a>
@@ -47,25 +47,28 @@
 
                 <div class="login-form-shell">
                     <h2>CADASTRAR</h2>
-                    <form class="login-form" id="register-form" novalidate>
+                    <form class="login-form" id="register-form" action="/cadastrar/" method="post">
+                        {% csrf_token %}
                         <div class="login-field">
                             <i class="material-symbols-outlined"></i>
-                            <input type="text" name="nome" id="nome" placeholder="Nome">
+                            <input type="text" name="nome" id="nome" value="{{ name }}" placeholder="Nome" minlength="2" maxlength="150" required>
                         </div>
 
                         <div class="login-field">
                             <i class="material-symbols-outlined"></i>
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuário" required>
+                            <input type="text" name="usuario" id="usuario" value="{{ username }}" placeholder="Usuário" minlength="3" maxlength="150" autocomplete="username" required>
                         </div>
 
                         <div class="login-field">
                             <i class="material-symbols-outlined"></i>
-                            <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                            <input type="password" name="senha" id="senha" placeholder="Senha (mínimo de 8 caracteres)" minlength="8" autocomplete="new-password" required>
                         </div>
 
                         <button type="submit" class="button-primary">Cadastrar</button>
                     </form>
-                    <p class="login-note" id="register-status"></p>
+                    {% if status_message %}
+                    <p class="login-note" id="register-status" role="status" aria-live="polite" style="color:#b10f0f">{{ status_message }}</p>
+                    {% endif %}
                 </div>
             </div>
         </section>
@@ -73,37 +76,16 @@
 
 
     <script>
-        const form = document.getElementById('register-form');
-        const nameInput = document.getElementById('nome');
-        const userInput = document.getElementById('usuario');
-        const passInput = document.getElementById('senha');
-        const statusText = document.getElementById('register-status');
         const burger = document.querySelector('.burger');
         const menu = document.getElementById('menu-principal');
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const name = nameInput.value.trim();
-            const user = userInput.value.trim();
-            const pass = passInput.value;
-
-            if (name.length < 2 || user.length < 3 || pass.length < 4) {
-                statusText.textContent = 'Preencha nome, usuário e senha corretamente.';
-                statusText.style.color = '#b10f0f';
-                return;
-            }
-
-            statusText.textContent = 'Cadastro enviado. Agora clique em Entrar.';
-            statusText.style.color = '#1f8a35';
-            form.reset();
-        });
-
-        burger.addEventListener('click', function () {
-            const isOpen = menu.classList.toggle('is-open');
-            burger.classList.toggle('is-open', isOpen);
-            burger.setAttribute('aria-expanded', String(isOpen));
-        });
+        if (burger && menu) {
+            burger.addEventListener('click', function () {
+                const isOpen = menu.classList.toggle('is-open');
+                burger.classList.toggle('is-open', isOpen);
+                burger.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
     </script>
 </body>
 </html>

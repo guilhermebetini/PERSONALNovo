@@ -232,6 +232,16 @@ input {
     filter 180ms ease;
 }
 
+.logout-form {
+  margin: 0;
+}
+
+.logout-form .topbar-cta {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 /* .topbar-cta:hover e .topbar-cta:focus-visible: realce interativo do CTA do topo. */
 .topbar-cta:hover,
 .topbar-cta:focus-visible {

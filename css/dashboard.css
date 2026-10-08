@@ -189,6 +189,16 @@ button {
     transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
+.logout-form {
+    margin: 0;
+}
+
+.logout-form .topbar-cta {
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 .topbar-cta:hover,
 .topbar-cta:focus-visible {
     transform: translateY(-2px);
@@ -573,6 +583,12 @@ button {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.dashboard-list-empty {
+    padding: 16px 0;
+    color: var(--text-light);
+    text-align: center;
 }
 
 .product-item {

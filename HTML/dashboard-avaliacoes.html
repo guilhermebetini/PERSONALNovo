@@ -9,17 +9,11 @@
     <link rel="stylesheet" href="/static/css/dashboard-avaliacoes.css?v=1">
 </head>
 <body class="reviews-dashboard-page">
-    <script>
-        if (sessionStorage.getItem('adminAuth') !== '1') {
-            window.location.href = 'entrar.html';
-        }
-    </script>
-
     <header class="topbar">
         <a class="brand" href="dashboard.html">Opini<span>Aki</span></a>
-        <form class="search" role="search" onsubmit="return false">
+        <form class="search" action="/buscar/" method="get" role="search">
             <button type="submit" aria-label="Buscar"></button>
-            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
+            <input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required>
         </form>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
             <a href="dashboard.html">Dashboard</a>
@@ -27,7 +21,10 @@
             <a href="paginaInicial.html">Ambiente</a>
             <a href="contato.html">Contato</a>
         </nav>
-        <a class="topbar-cta" id="logout-btn" href="entrar.html" role="button">Sair</a>
+        <form class="logout-form" action="/sair/" method="post">
+            {% csrf_token %}
+            <button class="topbar-cta" type="submit">Sair</button>
+        </form>
         <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
             <span>Menu</span>
         </button>

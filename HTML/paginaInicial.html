@@ -40,15 +40,17 @@
         </a>
 
         <!-- Busca -->
-        <div class="search">
+        <form class="search" action="/buscar/" method="get" role="search">
             <input type="text"
+                name="q"
                 placeholder="Buscar no site..."
-                aria-label="Buscar no site">
+                aria-label="Buscar no site"
+                required>
 
-            <button type="button" aria-label="Buscar">
+            <button type="submit" aria-label="Buscar">
                 <span class="material-symbols-outlined">search</span>
             </button>
-        </div>
+        </form>
 
         <!-- Menu -->
         <nav class="menu" id="menu-principal">

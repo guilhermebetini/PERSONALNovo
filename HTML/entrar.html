@@ -13,10 +13,10 @@
 <body class="login-page">
     <header class="topbar">
         <a href="paginaInicial.html" class="brand">Opini<span>Aki</span></a>
-        <div class="search">
-            <input type="search" placeholder="Buscar no site..." aria-label="Buscar no site">
-            <button type="button" aria-label="Buscar"></button>
-        </div>
+        <form class="search" action="/buscar/" method="get" role="search">
+            <input type="search" name="q" placeholder="Buscar no site..." aria-label="Buscar no site" required>
+            <button type="submit" aria-label="Buscar"></button>
+        </form>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
             <a href="paginaInicial.html">Home</a>
             <a href="paginaInicial.html">Ambiente</a>
@@ -39,50 +39,94 @@
                 </aside>
                 <div class="login-form-shell">
                     <h2>ENTRAR</h2>
-                    <form class="login-form" id="login-form" novalidate>
+                    <form class="login-form" id="login-form" action="/entrar/" method="post">
+                        {% csrf_token %}
                         <div class="login-field">
                             <i class="material-symbols-outlined" aria-hidden="true">person</i>
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuário" autocomplete="username" required>
+                            <input type="text" name="usuario" id="usuario" value="{{ username }}" placeholder="Usuário" autocomplete="username" minlength="3" required>
                         </div>
                         <div class="login-field">
                             <i class="material-symbols-outlined" aria-hidden="true">lock</i>
-                            <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="current-password" required>
+                            <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="current-password" minlength="8" required>
                         </div>
                         <button type="submit" class="button-primary">Entrar</button>
                     </form>
-                    <p class="login-note" id="login-status" role="status" aria-live="polite"></p>
+                    {% if google_client_id %}
+                    <div class="login-divider"><span>ou</span></div>
+                    <div id="g_id_onload"
+                         data-client_id="{{ google_client_id }}"
+                         data-callback="handleGoogleCredential"
+                         data-nonce="{{ google_nonce }}"
+                         data-auto_prompt="false"
+                         data-ux_mode="popup">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="outline"
+                         data-text="continue_with"
+                         data-size="large"
+                         data-width="320">
+                    </div>
+                    <p class="login-note" id="google-login-status" role="status" aria-live="polite"></p>
+                    {% endif %}
+                    {% if status_message %}
+                    <p class="login-note" id="login-status" role="status" aria-live="polite" style="color:#b10f0f">{{ status_message }}</p>
+                    {% endif %}
+                    {% for message in messages %}
+                    <p class="login-note" role="status" aria-live="polite" style="color:#1f8a35">{{ message }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        const form = document.getElementById('login-form');
-        const statusText = document.getElementById('login-status');
-        const burger = document.querySelector('.burger');
-        const menu = document.getElementById('menu-principal');
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const user = form.elements.usuario.value.trim();
-            const password = form.elements.senha.value;
-
-            if (user.length < 3 || password.length < 4) {
-                statusText.textContent = 'Informe um usuário com pelo menos 3 caracteres e uma senha com pelo menos 4.';
-                statusText.style.color = '#b10f0f';
+        window.handleGoogleCredential = async (response) => {
+            const status = document.getElementById('google-login-status');
+            if (!response || !response.credential) {
+                status.textContent = 'O Google não retornou uma credencial válida.';
                 return;
             }
 
-            sessionStorage.setItem('adminAuth', '1');
-            sessionStorage.setItem('adminUser', user);
-            window.location.href = 'dashboard.html';
-        });
+            const csrfCookie = document.cookie
+                .split('; ')
+                .find((cookie) => cookie.startsWith('csrftoken='));
+            const csrfToken = csrfCookie ? decodeURIComponent(csrfCookie.split('=').slice(1).join('=')) : '';
+            status.textContent = 'Entrando com Google...';
 
-        burger.addEventListener('click', () => {
-            const isOpen = menu.classList.toggle('is-open');
-            burger.classList.toggle('is-open', isOpen);
-            burger.setAttribute('aria-expanded', String(isOpen));
-        });
+            try {
+                const result = await fetch('/auth/google/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({ credential: response.credential })
+                });
+                const data = await result.json();
+                if (!result.ok) {
+                    throw new Error(data.error || 'Não foi possível entrar com o Google.');
+                }
+                window.location.assign(data.redirect_url);
+            } catch (error) {
+                status.textContent = error.message || 'Não foi possível entrar com o Google.';
+            }
+        };
+
+        const burger = document.querySelector('.burger');
+        const menu = document.getElementById('menu-principal');
+
+        if (burger && menu) {
+            burger.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('is-open');
+                burger.classList.toggle('is-open', isOpen);
+                burger.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
     </script>
+    {% if google_client_id %}
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    {% endif %}
 </body>
 </html>
